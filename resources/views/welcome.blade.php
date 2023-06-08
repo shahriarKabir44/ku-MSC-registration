@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>MSC form</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -55,19 +55,13 @@
 			 
 			<div class="inputGroup">
 				<h3 class="inputGroupHeader">Birth Information</h3>
-				<div class="">
-					<div class="flex">
+				<div class="gridContainer">
 						<label for="birthDistrict">Birth district</label>
 						<input type="text" name="birthDistrict" id="">
-					</div>
-					<div class="flex">
 						<label for="dateOfBirth">Date of birth</label>
 						<input type="date" name="birthDistrict" id="">
-					</div>
-					<div class="flex">
 						<label for="nationality">Nationality</label>
 						<input type="text" name="nationality" id="">
-					</div>
 				</div>
 			</div>
 			
@@ -85,9 +79,9 @@
 					</thead>
 					<tbody>
 						<tr  class="formTableRow">
-							<th>
+							<td>
 								Passing year
-							</th>
+							</td>
 							<th>			
 								<input placeholder="Type here" class="tableInput" type="text"  name="bsc_passing_yr" id="">
 							</th>
@@ -103,7 +97,7 @@
 						</tr>
 
 						<tr class="formTableRow">
-							<th>Board / university</th>
+							<td>Board / university</td>
 							<td>				
 								<input placeholder="Type here" class="tableInput" type="text" name="bsc_university" id="">
 							</td>
@@ -116,7 +110,7 @@
 							 
 						</tr>
 						<tr class="formTableRow">
-							<th>GPA</th>
+							<td>GPA</td>
 							<td>				
 								<input placeholder="Type here" class="tableInput" type="text" name="bsc_GPA" id="">
 							</td>
@@ -128,8 +122,20 @@
 							</td>
 							 
 						</tr>
+
 					</tbody>
 				</table>
+			</div>
+			<div class="inputGroup">
+				<h3 class="inputGroupHeader">Employment Status <span style="font-size: 15px">(Optional)</span></h3>
+				<div class="gridContainer">
+					<label for="companyName">Company / institute name</label>
+					<input type="text" name="companyName" id="">
+					<label for="companyPosition">Position</label>
+					<input type="text" name="companyPosition" id="">
+					<label for="joiningDate">Joining date</label>
+					<input type="date" name="joiningDate" id="">
+				</div>
 			</div>
         </form>
     </body>
