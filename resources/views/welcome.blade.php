@@ -152,6 +152,44 @@
 							<th>Position of the Supervisor</th>
 						</tr>
 					</thead>
+					<tbody>
+						<tr class="formTableRow">
+ 							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="researchTitle1" id="">
+							</td>
+							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisorName1" id="">
+							</td>
+							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisor1Position" id="">
+							</td>
+							 
+						</tr>
+						<tr class="formTableRow">
+ 							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="researchTitle2" id="">
+							</td>
+							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisorName2" id="">
+							</td>
+							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisor2Position" id="">
+							</td>
+							 
+						</tr>
+						<tr class="formTableRow">
+ 							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="researchTitle3" id="">
+							</td>
+							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisorName3" id="">
+							</td>
+							<td>				
+								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisor3Position" id="">
+							</td>
+							 
+						</tr>
+					</tbody>
 				</table>
 			</div>
         </form>
