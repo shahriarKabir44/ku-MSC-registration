@@ -12,21 +12,32 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="{{ asset('css/app.css') }}" >
+		<script defer src="{{ asset('js/mscRegistration.js') }}"></script>
+
         <!-- Styles -->
         
     </head>
     <body class="antialiased">
-         <form class="container" action="/api/store" method="POST">
+         <form class="container row" id="mscForm">
             @csrf
 			<div class="inputGroup">
 				<h3 class="inputGroupHeader">Personal Information</h3>
 				<div class="gridContainer">
+						<label for="photo">Applicant's Photo</label>
+						<div style="display: flex;
+									flex-direction: column;
+									align-items: flex-end;
+									margin:15px 0"
+							>
+							<img style="width: 50%; aspect-ratio: 1/1" alt="Preview" id="previewImage">
+							<input type="file" name="photo" id="applicantPhoto">
+						</div>
 						<label for="name"> Applicant's name</label>
-						<input class="form-control" required name="name" type="text" />
+						<input class="form-control" required name="name" autocomplete="off"  type="text" />
 						<label for="fatherName"> Father's name</label>
-						<input class="form-control" required name="fatherName" type="text" />
+						<input class="form-control" required name="fatherName" autocomplete="off"  type="text" />
 						<label for="motherName"> Mother's name</label>
-						<input class="form-control" required name="motherName" type="text" />
+						<input class="form-control" required name="motherName" autocomplete="off"  type="text" />
 						<label for="gender">Gender</label>
 						<select  class="form-control" required name="gender" id="">
 							<option value="male">Male</option>
@@ -40,9 +51,9 @@
 							<option value="Buddhism">Buddhism</option>
 						</select>
 						<label for="email"> Email</label>
-						<input class="form-control" required name="email" type="email" />
+						<input class="form-control" required name="email" autocomplete="off"  type="email" />
 						<label for="phone"> Phone </label>
-						<input class="form-control" placeholder="(+88)" required name="phone" type="text" />
+						<input class="form-control" placeholder="(+88)" required name="phone" autocomplete="off"  type="text" />
 				</div>	
 			
 			</div>
@@ -50,9 +61,9 @@
 				<h3 class="inputGroupHeader">Address</h3>
 				<div class="gridContainer">
 						<label for="permanentAddress">Permanent Address</label>
-						<input class="form-control" required name="permanentAddress" type="text" />
+						<input class="form-control" required name="permanentAddress" autocomplete="off"  type="text" />
 						<label for="presentAddress">Present Address</label>
-						<input class="form-control" required name="presentAddress" type="text" />
+						<input class="form-control" required name="presentAddress" autocomplete="off"  type="text" />
 				</div>
 				
 			</div>
@@ -61,11 +72,11 @@
 				<h3 class="inputGroupHeader">Birth Information</h3>
 				<div class="gridContainer">
 						<label for="birthDistrict">Birth district</label>
-						<input class="form-control" type="text" name="birthDistrict" id="">
+						<input class="form-control" type="text" autocomplete="off"  name="birthDistrict" id="">
 						<label for="dateOfBirth">Date of birth</label>
-						<input class="form-control" type="date" name="birthDistrict" id="">
+						<input class="form-control" type="date" autocomplete="off"  name="birthDistrict" id="">
 						<label for="nationality">Nationality</label>
-						<input class="form-control" type="text" name="nationality" id="">
+						<input class="form-control" type="text" autocomplete="off"  name="nationality" id="">
 				</div>
 			</div>
 			
@@ -87,15 +98,15 @@
 								Passing year
 							</td>
 							<th>			
-								<input placeholder="Type here" class="tableInput form-control" type="text"  name="bsc_passing_yr" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text"  name="bsc_passing_yr" id="">
 							</th>
 							<td>	
 							 			
-								<input placeholder="Type here" class="tableInput form-control" type="text"   name="hsc_university_name" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text"   name="hsc_university_name" id="">
 							</td>
 							<td>	
 								 	
-								<input placeholder="Type here" class="tableInput form-control" type="text"  name="ssc_university" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text"  name="ssc_university" id="">
 							</td>
 							
 						</tr>
@@ -103,26 +114,26 @@
 						<tr class="formTableRow">
 							<td>Board / university</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="bsc_university" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="bsc_university" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="hsc_board_name" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="hsc_board_name" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="ssc_board_name" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="ssc_board_name" id="">
 							</td>
 							 
 						</tr>
 						<tr class="formTableRow">
 							<td>GPA</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="bsc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="bsc_GPA" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="hsc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="hsc_GPA" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="ssc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="ssc_GPA" id="">
 							</td>
 							 
 						</tr>
@@ -134,11 +145,11 @@
 				<h3 class="inputGroupHeader">Employment Status <span style="font-size: 15px">(Optional)</span></h3>
 				<div class="gridContainer">
 					<label for="companyName">Company / institute name</label>
-					<input class="form-control" type="text" name="companyName" id="">
+					<input class="form-control" autocomplete="off"  type="text" name="companyName" id="">
 					<label    for="companyPosition">Position</label>
-					<input  class="form-control" type="text" name="companyPosition" id="">
+					<input  class="form-control" autocomplete="off"  type="text" name="companyPosition" id="">
 					<label   for="joiningDate">Joining date</label>
-					<input  class="form-control" type="date" name="joiningDate" id="">
+					<input  class="form-control" autocomplete="off"  type="date" name="joiningDate" id="">
 				</div>
 			</div>
 
@@ -155,43 +166,44 @@
 					<tbody>
 						<tr class="formTableRow">
  							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="researchTitle1" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="researchTitle1" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisorName1" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisorName1" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisor1Position" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisor1Position" id="">
 							</td>
 							 
 						</tr>
 						<tr class="formTableRow">
  							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="researchTitle2" id="">
+								<input placeholder="Type here" autocomplete="off"  autocomplete="off" class="tableInput form-control" type="text" name="researchTitle2" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisorName2" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisorName2" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisor2Position" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisor2Position" id="">
 							</td>
 							 
 						</tr>
 						<tr class="formTableRow">
  							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="researchTitle3" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="researchTitle3" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisorName3" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisorName3" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" class="tableInput form-control" type="text" name="supervisor3Position" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisor3Position" id="">
 							</td>
 							 
 						</tr>
 					</tbody>
 				</table>
 			</div>
+			<button type="submit" style="width: 100%" class="btn btn-primary ">Apply</button>
         </form>
     </body>
 </html>
