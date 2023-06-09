@@ -97,16 +97,16 @@
 							<td>
 								Passing year
 							</td>
-							<th>			
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text"  name="bsc_passing_yr" id="">
-							</th>
+							<td>			
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number"  name="bsc_passing_yr" id="">
+							</td>
 							<td>	
 							 			
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text"   name="hsc_university_name" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number"   name="hsc_university_name" id="">
 							</td>
 							<td>	
 								 	
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text"  name="ssc_university" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number"  name="ssc_university" id="">
 							</td>
 							
 						</tr>
@@ -114,26 +114,26 @@
 						<tr class="formTableRow">
 							<td>Board / university</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="bsc_university" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text" name="bsc_university" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="hsc_board_name" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text" name="hsc_board_name" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="ssc_board_name" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text" name="ssc_board_name" id="">
 							</td>
 							 
 						</tr>
 						<tr class="formTableRow">
 							<td>GPA</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="bsc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" name="bsc_GPA" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="hsc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" name="hsc_GPA" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="ssc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" name="ssc_GPA" id="">
 							</td>
 							 
 						</tr>
@@ -166,37 +166,37 @@
 					<tbody>
 						<tr class="formTableRow">
  							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="researchTitle1" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_researchTitle1" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisorName1" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_supervisorName1" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisor1Position" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_supervisor1Position" id="">
 							</td>
 							 
 						</tr>
 						<tr class="formTableRow">
  							<td>				
-								<input placeholder="Type here" autocomplete="off"  autocomplete="off" class="tableInput form-control" type="text" name="researchTitle2" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_researchTitle2" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisorName2" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_supervisorName2" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisor2Position" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_supervisor2Position" id="">
 							</td>
 							 
 						</tr>
 						<tr class="formTableRow">
  							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="researchTitle3" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_researchTitle3" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisorName3" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_supervisorName3" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="supervisor3Position" id="">
+								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_supervisor3Position" id="">
 							</td>
 							 
 						</tr>

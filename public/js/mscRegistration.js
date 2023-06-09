@@ -14,3 +14,15 @@ selectElement('applicantPhoto').onchange = e => {
     }
     selectElement('previewImage').src = URL.createObjectURL(fileObj)
 }
+
+
+selectElement('mscForm').onsubmit = e => {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    let data = {}
+    for (const [key, value] of formData.entries()) {
+        data[key] = value;
+    }
+    console.log(data)
+}
+
