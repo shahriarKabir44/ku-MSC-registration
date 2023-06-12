@@ -4,10 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>MSC form</title>
+        <title>Master's form</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -17,8 +18,8 @@
         <!-- Styles -->
         
     </head>
-    <body class="antialiased">
-         <form class="container row" id="mscForm">
+    <body class="container row" style="max-width: none;padding:20px;margin: 50px auto" ng-app="mscformApp" ng-controller="msc-form-controller" >
+         <form class="col-lg-12" id="mscForm">
             @csrf
 			<div class="inputGroup">
 				<h3 class="inputGroupHeader">Personal Information</h3>
@@ -29,31 +30,37 @@
 									align-items: flex-end;
 									margin:15px 0"
 							>
-							<img style="width: 50%; aspect-ratio: 1/1" alt="Preview" id="previewImage">
-							<input type="file" name="photo" id="applicantPhoto">
+							<img   style="width: 200px; aspect-ratio: 1/1" alt="Preview" id="previewImage">
+							<input  onchange="angular.element(this).scope().selectImage(event)" type="file" name="photo" id="applicantPhoto">
 						</div>
 						<label for="name"> Applicant's name</label>
-						<input class="form-control" required name="name" autocomplete="off"  type="text" />
+						<input class="form-control" required ng-model="applicant.name" autocomplete="off"  type="text" />
 						<label for="fatherName"> Father's name</label>
-						<input class="form-control" required name="fatherName" autocomplete="off"  type="text" />
+						<input class="form-control" required ng-model="applicant.fatherName" autocomplete="off"  type="text" />
 						<label for="motherName"> Mother's name</label>
-						<input class="form-control" required name="motherName" autocomplete="off"  type="text" />
+						<input class="form-control" required ng-model="applicant.motherName" autocomplete="off"  type="text" />
 						<label for="gender">Gender</label>
-						<select  class="form-control" required name="gender" id="">
+						<select  class="form-control" required ng-model="applicant.gender" id="">
+							<option value="">choose one</option>
 							<option value="male">Male</option>
 							<option value="female">Female</option>
 						</select>
 						<label for="religion">Religion</label>
-						<select  class="form-control" required name="religion" id="">
+						<select  class="form-control" required ng-model="applicant.religion" id="">
+							<option value="">choose one</option>
 							<option value="Islam">Islam</option>
 							<option value="Hindu">Hindu</option>
 							<option value="Christianity">Christianity</option>
 							<option value="Buddhism">Buddhism</option>
 						</select>
 						<label for="email"> Email</label>
-						<input class="form-control" required name="email" autocomplete="off"  type="email" />
+						<input class="form-control" required ng-model="applicant.email" autocomplete="off"  type="email" />
 						<label for="phone"> Phone </label>
-						<input class="form-control" placeholder="(+88)" required name="phone" autocomplete="off"  type="text" />
+						<input class="form-control" placeholder="(+88)" required ng-model="applicant.phone" autocomplete="off"  type="text" />
+						<label for="dateOfBirth">Date of birth</label>
+						<input class="form-control" type="date" autocomplete="off"  ng-model="applicant.birthDate" id="">
+						<label for="nationality">Nationality</label>
+						<input class="form-control" type="text" autocomplete="off"  ng-model="applicant.nationality" id="">
 				</div>	
 			
 			</div>
@@ -61,24 +68,14 @@
 				<h3 class="inputGroupHeader">Address</h3>
 				<div class="gridContainer">
 						<label for="permanentAddress">Permanent Address</label>
-						<input class="form-control" required name="permanentAddress" autocomplete="off"  type="text" />
+						<input class="form-control" required ng-model="applicant.permanentAddress" autocomplete="off"  type="text" />
 						<label for="presentAddress">Present Address</label>
-						<input class="form-control" required name="presentAddress" autocomplete="off"  type="text" />
+						<input class="form-control" required ng-model="applicant.presentAddress" autocomplete="off"  type="text" />
 				</div>
 				
 			</div>
 			 
-			<div class="inputGroup">
-				<h3 class="inputGroupHeader">Birth Information</h3>
-				<div class="gridContainer">
-						<label for="birthDistrict">Birth district</label>
-						<input class="form-control" type="text" autocomplete="off"  name="birthDistrict" id="">
-						<label for="dateOfBirth">Date of birth</label>
-						<input class="form-control" type="date" autocomplete="off"  name="birthDistrict" id="">
-						<label for="nationality">Nationality</label>
-						<input class="form-control" type="text" autocomplete="off"  name="nationality" id="">
-				</div>
-			</div>
+			 
 			
 			<div  class="inputGroup">
 				<h3 class="inputGroupHeader">Educational Qualification</h3>
@@ -87,53 +84,53 @@
 					 
 						<tr class="formTableRow">
 							<th></th>
-							<th>BSc. Engg / Equivalent</th>
-							<th>HSC / Equivalent</th>
-							<th>SSC / Equivalent</th>
+							<th>Passing year</th>
+							<th>Board / university</th>
+							<th>GPA</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr  class="formTableRow">
-							<td>
-								Passing year
-							</td>
+							<th>
+								Bachelor's / Equivalent	
+							</th>
 							<td>			
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number"  name="bsc_passing_yr" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number"  ng-model="applicant.hons_passing_yr" id="">
 							</td>
 							<td>	
 							 			
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number"   name="hsc_university_name" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text"   ng-model="applicant.hons_university" id="">
 							</td>
 							<td>	
 								 	
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number"  name="ssc_university" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number"  ng-model="applicant.hons_GPA" id="">
 							</td>
 							
 						</tr>
 
 						<tr class="formTableRow">
-							<td>Board / university</td>
+							<th>HSC / Equivalent</th>
 							<td>				
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text" name="bsc_university" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" ng-model="applicant.hsc_passing_yr" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text" name="hsc_board_name" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text" ng-model="applicant.hsc_board_name" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text" name="ssc_board_name" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" ng-model="applicant.hsc_GPA" id="">
 							</td>
 							 
 						</tr>
 						<tr class="formTableRow">
-							<td>GPA</td>
+							<th>SSC / Equivalent</th>
 							<td>				
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" name="bsc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" ng-model="applicant.ssc_passing_yr" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" name="hsc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="text" ng-model="applicant.ssc_board_name" id="">
 							</td>
 							<td>				
-								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" name="ssc_GPA" id="">
+								<input placeholder="Type here" autocomplete="off" required class="tableInput form-control" type="number" ng-model="applicant.ssc_GPA" id="">
 							</td>
 							 
 						</tr>
@@ -145,15 +142,15 @@
 				<h3 class="inputGroupHeader">Employment Status <span style="font-size: 15px">(Optional)</span></h3>
 				<div class="gridContainer">
 					<label for="companyName">Company / institute name</label>
-					<input class="form-control" autocomplete="off"  type="text" name="companyName" id="">
+					<input class="form-control" autocomplete="off"  type="text" ng-model="applicant.companyName" id="">
 					<label    for="companyPosition">Position</label>
-					<input  class="form-control" autocomplete="off"  type="text" name="companyPosition" id="">
+					<input  class="form-control" autocomplete="off"  type="text" ng-model="applicant.companyPosition" id="">
 					<label   for="joiningDate">Joining date</label>
-					<input  class="form-control" autocomplete="off"  type="date" name="joiningDate" id="">
+					<input  class="form-control" autocomplete="off"  type="date" ng-model="applicant.joiningDate" id="">
 				</div>
 			</div>
 
-			<div class="inputGroup">
+			{{-- <div class="inputGroup">
 				<h3 class="inputGroupHeader">Research <span style="font-size: 15px">(Optional)</span></h3>
 				<table class="table table-striped">
 					<thead>
@@ -165,7 +162,7 @@
 					</thead>
 					<tbody>
 						<tr class="formTableRow">
- 							<td>				
+ 							<td>																							
 								<input placeholder="Type here" autocomplete="off"  class="tableInput form-control" type="text" name="research_researchTitle1" id="">
 							</td>
 							<td>				
@@ -202,7 +199,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
+			</div> --}}
 			<button type="submit" style="width: 100%" class="btn btn-primary ">Apply</button>
         </form>
     </body>
