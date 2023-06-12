@@ -87,3 +87,16 @@
      /* padding: 5px; */
      border: 1px solid;
  }
+
+ .applicantPersonalInfoContainer {
+     display: grid;
+     grid-template-columns: 70% auto;
+ }
+
+ .applicantImageContainer {
+     width: inherit;
+ }
+
+ img.applicantImage {
+     width: 100%;
+ }

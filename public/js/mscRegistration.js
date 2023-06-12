@@ -18,10 +18,32 @@ selectElement('previewImage').src = defaultPreviewImage
 angular.module('mscformApp', [])
     .controller('msc-form-controller', ($scope) => {
         $scope.applicant = {
-            photo: defaultPreviewImage
+            "photo": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+            "name": "shahriar",
+            "fatherName": "abcd",
+            "motherName": "abcd",
+            "gender": "male", "religion": "Hindu",
+            "email": "shahriar1904@cseku.ac.bd", "phone": "01631560063",
+            "permanentAddress": "Khan Bahadur Ahsanulla Hall, Khulna University, Khulna",
+            "birthDate": new Date(),
+            "nationality": "weeqw", "discipline": "URP",
+            "presentAddress": "111",
+            "hons_passing_yr": 1111,
+            "hons_university": "111", "hons_GPA": 111, "hsc_GPA": 11111, "hsc_board_name": "111",
+            "hsc_passing_yr": 111, "ssc_passing_yr": 111, "ssc_board_name": "1", "ssc_GPA": 111,
+            "companyName": "111", "companyPosition": "111",
+            "joiningDate": new Date()
         }
 
-
+        $scope.submitMastersForm = () => {
+            $scope.photo = null
+            let keys = []
+            for (let key in $scope.applicant) {
+                keys.push(key)
+            }
+            console.log(JSON.stringify(keys))
+            $('#myModal').modal('show')
+        }
 
         $scope.selectImage = (event) => {
             let files = event.target.files;
@@ -29,7 +51,6 @@ angular.module('mscformApp', [])
             reader.onload = function (e) {
                 $scope.applicant.photo = e.target.result;
                 selectElement('previewImage').src = e.target.result;
-                uploadImage(e.target.result)
                 $scope.$apply();
             };
             reader.readAsDataURL(files[0]);
