@@ -9,10 +9,13 @@ class ImageController extends Controller
 {
     public function upload(Request $request)
     {
+
         if ($request->has('image')) {
             $image = $request->file('image');
-            $name = time() . '.' . $image->getClientOriginalExtension();
+            $ext = $request->header('ext');
+            $name = time() . '.' . $ext;
             $image->move('images/', $name);
+
             return response()->json(['success' => 'true']);
 
         }

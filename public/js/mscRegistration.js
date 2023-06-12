@@ -45,7 +45,9 @@ async function uploadImage(base64Image) {
     let url = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
-
+        headers: {
+            ext: 'jpg'
+        }
     }).then(res => res.json())
     return url
 }
