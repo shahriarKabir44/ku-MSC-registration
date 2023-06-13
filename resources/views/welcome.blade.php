@@ -245,7 +245,10 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Preview</h4>
 				</div>
-				<div class="modal-body" style="padding: 20px;">
+				<div class="modal-body" id="pdfContainer" style="padding: 20px;
+												border: 1px solid #00cbff;
+												margin: 10px;
+												border-radius: 10px;">
 					<div class="logoContainer">
 						<div class="ku_logo">
 							<img src="{{ asset('/ku_logo.png') }}" alt="" class="ku_logo_img">
@@ -381,6 +384,33 @@
 						</tr>
 
 
+					</table>
+					<h3>Research History</h3>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Research Field</th>
+								<th>Supevisor Name</th>
+								<th>Position of the Supervisor</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="research in researchHistory">
+								<td>
+									@{{research.title}}
+
+								</td>
+								<td>
+									@{{research.supervisorName}}
+
+								</td>
+								<td>
+									@{{research.supervisor1Position}}
+
+								</td>
+
+							</tr>
+						</tbody>
 					</table>
 				</div>
 

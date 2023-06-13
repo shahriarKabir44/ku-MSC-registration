@@ -15,7 +15,8 @@ class ResearchController extends Controller
         $reseach->fill($inputs);
         try {
             $reseach->save();
-            $data = DB::raw("select * from research; ");
+            return response()->json(['success' => true]);
+
         } catch (\Throwable $th) {
             return response()->json(['success' => $th]);
 
