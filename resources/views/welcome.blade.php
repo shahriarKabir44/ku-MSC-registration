@@ -10,11 +10,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-	<!-- Fonts -->
+	<script src="{{ asset('js/jspdf.js') }}"></script>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 	<link rel="preconnect" href="https://fonts.bunny.net">
-	<link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+	<link href="{{ asset('js/html2canvas.js') }}" rel="stylesheet" />
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-	<script defer src="{{ asset('js/mscRegistration.js') }}"></script>
 
 	<!-- Styles -->
 
@@ -422,6 +422,8 @@
 			</div>
 		</div>
 	</div>
+
+	<script defer src="{{ asset('js/mscRegistration.js') }}"></script>
 
 
 

@@ -106,7 +106,7 @@ angular.module('mscformApp', [])
                             })
                         }).then(res => res.json())
                             .then(data => {
-
+                                generatePDF()
                             })
                         )
                     }
@@ -115,7 +115,26 @@ angular.module('mscformApp', [])
         }
     })
 
+function generatePDF() {
+    const divElement = document.getElementById('pdfContainer');
 
+    let mywindow = window.open('', 'PRINT', 'height=650,width=900,top=100,left=150');
+
+    mywindow.document.write(`<html><head><title>Form</title>`);
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(`
+        	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://localhost:8000/css/app.css">
+
+    `);
+    mywindow.document.write(divElement.innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close();
+    mywindow.focus();
+    mywindow.print();
+
+}
 async function uploadImage(base64Image, id) {
     let formData = new FormData()
     let blob = await fetch(base64Image)
