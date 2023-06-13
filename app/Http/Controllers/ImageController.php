@@ -9,6 +9,7 @@ class ImageController extends Controller
 {
     public function upload(Request $request)
     {
+        \Log::info('This is some useful information.');
 
         if ($request->has('image')) {
             $image = $request->file('image');

@@ -55,6 +55,23 @@ angular.module('mscformApp', [])
             };
             reader.readAsDataURL(files[0]);
         }
+
+        $scope.confirmSubmission = () => {
+            let photo = $scope.applicant.photo
+            let applicant = JSON.parse(JSON.stringify($scope.applicant))
+            applicant.photo = "abcd"
+            fetch('/api/confirmSubmission', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(applicant)
+            }).then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    uploadImage(photo)
+                })
+        }
     })
 
 

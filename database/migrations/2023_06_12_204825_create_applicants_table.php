@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('name');
             $table->string('fatherName');
             $table->string('motherName');
