@@ -45,9 +45,9 @@
 									flex-direction: column;
 									align-items: flex-end;
 									margin:15px 0">
-					<img style="width: 200px; aspect-ratio: 3/4" alt="Preview" id="previewImage">
+					<img style="width: 200px;  " alt="Preview" id="previewImage" />
 					<input onchange="angular.element(this).scope().selectImage(event)" type="file" name="photo"
-						id="applicantPhoto">
+						id="applicantPhoto" />
 				</div>
 				<label for="name"> Applicant's name </label>
 				<input class="form-control" required ng-model="applicant.name" autocomplete="off" type="text" />
@@ -186,70 +186,54 @@
 				<input class="form-control" autocomplete="off" type="text" ng-model="applicant.companyName" id="">
 				<label for="companyPosition">Position</label>
 				<input class="form-control" autocomplete="off" type="text" ng-model="applicant.companyPosition" id="">
-				<label for="joiningDate">Joining date</label>
+				<label for="joiningDate">Joining date <button class="btn">d</button> </label>
 				<input class="form-control" autocomplete="off" type="date" ng-model="applicant.joiningDate" id="">
 			</div>
 		</div>
 
-		{{-- <div class="inputGroup">
+		<div class="inputGroup">
 			<h3 class="inputGroupHeader">Research <span style="font-size: 15px">(Optional)</span></h3>
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Proposed Research Field</th>
+						<th>Research Field</th>
 						<th>Supevisor Name</th>
 						<th>Position of the Supervisor</th>
+						<th>
+							<div style="display: flex;
+										align-items: flex-end;
+										gap: 10px;">
+								<p>Action</p>
+								<input type="button" class="btn btn-primary" ng-click="addResearch()" value="Add">
+
+							</div>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="formTableRow">
+					<tr ng-repeat="research in researchHistory" class="formTableRow">
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_researchTitle1" id="">
+								type="text" name="research.title" id="">
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_supervisorName1" id="">
+								type="text" name="research.supervisorName" id="">
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_supervisor1Position" id="">
+								type="text" name="research.supervisor1Position" id="">
 						</td>
+						<td>
+							<input type="button" class="btn btn-danger" ng-click=" deleteResearch(research.index)"
+								value="Remove">
 
+						</td>
 					</tr>
-					<tr class="formTableRow">
-						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_researchTitle2" id="">
-						</td>
-						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_supervisorName2" id="">
-						</td>
-						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_supervisor2Position" id="">
-						</td>
 
-					</tr>
-					<tr class="formTableRow">
-						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_researchTitle3" id="">
-						</td>
-						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_supervisorName3" id="">
-						</td>
-						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research_supervisor3Position" id="">
-						</td>
-
-					</tr>
 				</tbody>
 			</table>
-		</div> --}}
+		</div>
 		<button type="submit" style="width: 100%" class="btn btn-primary ">Apply</button>
 	</form>
 
@@ -262,7 +246,15 @@
 					<h4 class="modal-title">Preview</h4>
 				</div>
 				<div class="modal-body" style="padding: 20px;">
-					<div class="headingContainer"></div>
+					<div class="logoContainer">
+						<div class="ku_logo">
+							<img src="{{ asset('/ku_logo.png') }}" alt="" class="ku_logo_img">
+						</div>
+						<div class="pageHeadingTextContainer">
+							<h2>Khulna University</h2>
+							<h3>Master's Admission form</h3>
+						</div>
+					</div>
 					<h3>Personal Information</h3>
 					<div class="applicantPersonalInfoContainer">
 						<div class="personalInfoTable">

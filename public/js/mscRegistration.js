@@ -32,10 +32,19 @@ angular.module('mscformApp', [])
             "hons_university": "111", "hons_GPA": 111, "hsc_GPA": 11111, "hsc_board_name": "111",
             "hsc_passing_yr": 111, "ssc_passing_yr": 111, "ssc_board_name": "1", "ssc_GPA": 111,
             "companyName": "111", "companyPosition": "111",
-            "joiningDate": new Date()
+            "joiningDate": new Date(),
         }
-
+        $scope.researchHistory = []
+        $scope.addResearch = () => {
+            $scope.researchHistory.push({
+                index: $scope.researchHistory.length,
+                title: "",
+                supervisorName: "",
+                supervisor1Position: ""
+            })
+        }
         $scope.submitMastersForm = () => {
+            alert('p')
             $scope.photo = null
             let keys = []
             for (let key in $scope.applicant) {
@@ -50,8 +59,8 @@ angular.module('mscformApp', [])
             let reader = new FileReader();
             reader.onload = function (e) {
                 $scope.applicant.photo = e.target.result;
-                if ($scope.checkImageDimensions(e.target.result))
-                    selectElement('previewImage').src = e.target.result;
+                //  if ($scope.checkImageDimensions(e.target.result))
+                selectElement('previewImage').src = e.target.result;
 
                 $scope.$apply();
             };
