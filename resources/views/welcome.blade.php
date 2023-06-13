@@ -45,7 +45,7 @@
 									flex-direction: column;
 									align-items: flex-end;
 									margin:15px 0">
-					<img style="width: 200px; aspect-ratio: 1/1" alt="Preview" id="previewImage">
+					<img style="width: 200px; aspect-ratio: 3/4" alt="Preview" id="previewImage">
 					<input onchange="angular.element(this).scope().selectImage(event)" type="file" name="photo"
 						id="applicantPhoto">
 				</div>

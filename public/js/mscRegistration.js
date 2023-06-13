@@ -50,16 +50,28 @@ angular.module('mscformApp', [])
             let reader = new FileReader();
             reader.onload = function (e) {
                 $scope.applicant.photo = e.target.result;
-                selectElement('previewImage').src = e.target.result;
+                if ($scope.checkImageDimensions(e.target.result))
+                    selectElement('previewImage').src = e.target.result;
+
                 $scope.$apply();
             };
             reader.readAsDataURL(files[0]);
         }
-
+        $scope.checkImageDimensions = function (imgURL) {
+            let img = new Image();
+            img.onload = () => {
+                if (img.width == 300 && img.height == 400) {
+                    return 1
+                }
+                alert("The image dimension is incorrect!");
+                return 0
+            }
+            img.src = imgURL;
+        }
         $scope.confirmSubmission = () => {
             let photo = $scope.applicant.photo
             let applicant = JSON.parse(JSON.stringify($scope.applicant))
-            applicant.photo = "abcd"
+            applicant.photo = ""
             fetch('/api/confirmSubmission', {
                 method: 'POST',
                 headers: {
