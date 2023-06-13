@@ -43,8 +43,10 @@ angular.module('mscformApp', [])
                 supervisor1Position: ""
             })
         }
+        $scope.deleteResearch = index => {
+            $scope.researchHistory = $scope.researchHistory.filter(research => research.index !== index);
+        }
         $scope.submitMastersForm = () => {
-            alert('p')
             $scope.photo = null
             let keys = []
             for (let key in $scope.applicant) {
@@ -80,7 +82,7 @@ angular.module('mscformApp', [])
         $scope.confirmSubmission = () => {
             let photo = $scope.applicant.photo
             let applicant = JSON.parse(JSON.stringify($scope.applicant))
-            applicant.photo = ""
+            applicant.photo = "abcd"
             fetch('/api/confirmSubmission', {
                 method: 'POST',
                 headers: {
@@ -88,15 +90,33 @@ angular.module('mscformApp', [])
                 },
                 body: JSON.stringify(applicant)
             }).then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    uploadImage(photo)
+                .then(async (newApplicant) => {
+
+                    let promises = [uploadImage(photo, newApplicant.data.id)]
+
+                    for (let research of $scope.researchHistory) {
+                        promises.push(fetch('/api/storeResearch', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                ...research,
+                                'applicantId': newApplicant.data.id,
+                            })
+                        }).then(res => res.json())
+                            .then(data => {
+
+                            })
+                        )
+                    }
+                    await Promise.all(promises)
                 })
         }
     })
 
 
-async function uploadImage(base64Image) {
+async function uploadImage(base64Image, id) {
     let formData = new FormData()
     let blob = await fetch(base64Image)
         .then(res => res.blob())
@@ -105,7 +125,8 @@ async function uploadImage(base64Image) {
         method: 'POST',
         body: formData,
         headers: {
-            ext: 'jpg'
+            ext: 'jpg',
+            id
         }
     }).then(res => res.json())
     return url

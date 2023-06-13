@@ -186,7 +186,7 @@
 				<input class="form-control" autocomplete="off" type="text" ng-model="applicant.companyName" id="">
 				<label for="companyPosition">Position</label>
 				<input class="form-control" autocomplete="off" type="text" ng-model="applicant.companyPosition" id="">
-				<label for="joiningDate">Joining date <button class="btn">d</button> </label>
+				<label for="joiningDate">Joining date </label>
 				<input class="form-control" autocomplete="off" type="date" ng-model="applicant.joiningDate" id="">
 			</div>
 		</div>
@@ -214,15 +214,15 @@
 					<tr ng-repeat="research in researchHistory" class="formTableRow">
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research.title" id="">
+								type="text" ng-model="research.title" id="">
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research.supervisorName" id="">
+								type="text" ng-model="research.supervisorName" id="">
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" name="research.supervisor1Position" id="">
+								type="text" ng-model="research.supervisor1Position" id="">
 						</td>
 						<td>
 							<input type="button" class="btn btn-danger" ng-click=" deleteResearch(research.index)"
