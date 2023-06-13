@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'upload']);
 
 Route::post('/confirmSubmission', [\App\Http\Controllers\ApplicantController::class, 'create']);
+
+Route::post('/storeResearch', [\App\Http\Controllers\ResearchController::class, 'create']);

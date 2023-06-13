@@ -10,8 +10,7 @@ class ApplicantController extends Controller
     public function create(Request $request)
     {
 
-        //echo $request->fatherName;
-        //exit();
+
         $inputs = $request->all();
         $applicant = new Applicant();
         $applicant->fill($inputs);
@@ -24,7 +23,6 @@ class ApplicantController extends Controller
             return response()->json(['data' => $th]);
 
         }
-        // echo ("nabil");
-        //Applicant::create($inputs);
+
     }
 }
