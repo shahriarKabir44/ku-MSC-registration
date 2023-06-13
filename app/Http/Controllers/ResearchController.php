@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Research;
+use DB;
 use Illuminate\Http\Request;
 
 class ResearchController extends Controller
@@ -14,7 +15,7 @@ class ResearchController extends Controller
         $reseach->fill($inputs);
         try {
             $reseach->save();
-            return response()->json($reseach);
+            $data = DB::raw("select * from research; ");
         } catch (\Throwable $th) {
             return response()->json(['success' => $th]);
 
