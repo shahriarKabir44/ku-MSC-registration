@@ -20,14 +20,27 @@
 
 </head>
 
-<body class="container row" style="max-width: none;padding:20px;margin: 50px auto" ng-app="mscformApp"
-	ng-controller="msc-form-controller">
+<body class="container row" style="max-width: 60vw;
+	padding:20px;
+	margin: 50px auto; 
+	font-family: 'Times New Roman', Times, serif;
+	box-shadow: 0 0 10px #ff973466;" ng-app="mscformApp" ng-controller="msc-form-controller">
+	<div class="logoContainer">
+		<div class="ku_logo">
+			<img src="{{ asset('/ku_logo.png') }}" alt="" class="ku_logo_img">
+		</div>
+		<div class="pageHeadingTextContainer">
+			<h2>Khulna University</h2>
+			<h3>Master's Admission form</h3>
+		</div>
+	</div>
 	<form class="col-lg-12" ng-submit="submitMastersForm()">
 		@csrf
 		<div class="inputGroup">
 			<h3 class="inputGroupHeader">Personal Information</h3>
 			<div class="gridContainer">
-				<label for="photo">Applicant's Photo</label>
+				<label for="photo">
+					Applicant's Photo <p style="font-size: 12px;">(The photo size will be 300px by 400px)</p> </label>
 				<div style="display: flex;
 									flex-direction: column;
 									align-items: flex-end;
