@@ -223,11 +223,15 @@
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" ng-model="research.supervisorName" id="">
+								type="date" ng-model="research.publishingDate" id="">
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" ng-model="research.supervisorPosition" id="">
+								type="text" ng-model="research.publishedOn" id="">
+						</td>
+						<td>
+							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
+								type="text" ng-model="research.paperLink" id="">
 						</td>
 						<td>
 							<input type="button" class="btn btn-danger" ng-click=" deleteResearch(research.index)"
@@ -260,22 +264,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="proposedResearche in proposedResearches" class="formTableRow">
+					<tr ng-repeat="proposedResearch in proposedResearches" class="formTableRow">
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" ng-model="proposedResearche.title" id="">
+								type="text" ng-model="proposedResearch.title" id="">
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" ng-model="proposedResearche.supervisorName" id="">
+								type="text" ng-model="proposedResearch.supervisorName" id="">
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" ng-model="proposedResearche.supervisorPosition" id="">
+								type="text" ng-model="proposedResearch.supervisorPosition" id="">
 						</td>
 						<td>
 							<input type="button" class="btn btn-danger"
-								ng-click=" deleteProposedResearch(proposedResearche.index)" value="Remove">
+								ng-click=" deleteProposedResearch(proposedResearch.index)" value="Remove">
 
 						</td>
 					</tr>
@@ -438,9 +442,10 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Research Field</th>
-								<th>Supevisor Name</th>
-								<th>Position of the Supervisor</th>
+								<th>Research Title</th>
+								<th>Publishing Date</th>
+								<th>Platform Published on</th>
+								<th>Paper Link</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -450,11 +455,41 @@
 
 								</td>
 								<td>
-									@{{research.supervisorName}}
+									@{{research.publishingDate}}
 
 								</td>
 								<td>
-									@{{research.supervisorPosition}}
+									@{{research.publishedOn}}
+
+								</td>
+								<td>
+									@{{research.paperLink}}
+
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<h3>Proposed Research Topics</h3>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Supervisor name</th>
+								<th>Supervisor Position</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="proposedResearch in proposedResearches">
+								<td>
+									@{{proposedResearch.title}}
+
+								</td>
+								<td>
+									@{{proposedResearch.supervisorName}}
+
+								</td>
+								<td>
+									@{{proposedResearch.supervisorPosition}}
 
 								</td>
 
