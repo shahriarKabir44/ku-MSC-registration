@@ -13,6 +13,8 @@ return new class extends Migration {
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
             $table->string('photo')->nullable();
+            $table->string('signature')->nullable();
+
             $table->string('name');
             $table->string('fatherName');
             $table->string('motherName');

@@ -32,4 +32,27 @@ class ImageController extends Controller
 
         }
     }
+    public function uploadSignature(Request $request)
+    {
+
+        if ($request->has('image')) {
+            $image = $request->file('image');
+            $ext = $request->header('ext');
+            $name = time() . '.' . $ext;
+            $image->move('signatures/', $name);
+            try {
+                $user = Applicant::find($request->header('id'));
+                if ($user) {
+                    $user->signature = 'signatures/' . $name;
+                    $user->save();
+                }
+                return response()->json(['success' => 'true']);
+            } catch (\Throwable $th) {
+                return response()->json(['success' => $th]);
+
+            }
+
+
+        }
+    }
 }

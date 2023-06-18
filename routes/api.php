@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'upload']);
+Route::post('/uploadSignature', [\App\Http\Controllers\ImageController::class, 'uploadSignature']);
 
 Route::post('/confirmSubmission', [\App\Http\Controllers\ApplicantController::class, 'create']);
 

@@ -70,16 +70,16 @@ angular.module('mscformApp', [])
             for (let key in $scope.applicant) {
                 keys.push(key)
             }
-            console.log(JSON.stringify(keys))
+
             $('#myModal').modal('show')
         }
         $scope.selectSignatureImage = (event) => {
             let files = event.target.files;
             let reader = new FileReader();
             reader.onload = function (e) {
-                $scope.applicant.photo = e.target.result;
+                $scope.applicant.signature = e.target.result;
                 //  if ($scope.checkImageDimensions(e.target.result))
-                selectElement('previewImage').src = e.target.result;
+                selectElement('previewSignatureImage').src = e.target.result;
 
                 $scope.$apply();
             };
@@ -89,9 +89,9 @@ angular.module('mscformApp', [])
             let files = event.target.files;
             let reader = new FileReader();
             reader.onload = function (e) {
-                $scope.applicant.signatue = e.target.result;
+                $scope.applicant.photo = e.target.result;
                 //  if ($scope.checkImageDimensions(e.target.result))
-                selectElement('previewSignatureImage').src = e.target.result;
+                selectElement('previewImage').src = e.target.result;
 
                 $scope.$apply();
             };
@@ -112,6 +112,7 @@ angular.module('mscformApp', [])
             let { signatue, photo } = $scope.applicant
             let applicant = structuredClone($scope.applicant)
             applicant.photo = "abcd"
+            applicant.signatue = "wfhwei"
             fetch('/api/confirmSubmission', {
                 method: 'POST',
                 headers: {
@@ -158,10 +159,10 @@ angular.module('mscformApp', [])
 function generatePDF() {
     const divElement = document.getElementById('pdfContainer');
 
-    let mywindow = window.open('', 'PRINT', 'height=650,width=900,top=100,left=150');
+    let mywindow = window.open('', 'PRINT', 'height=650,width=1000,top=100,left=150');
 
     mywindow.document.write(`<html><head><title>Form</title>`);
-    mywindow.document.write('</head><body >');
+    mywindow.document.write('</head><body style="margin:50px auto; max-width:100% !important;" >');
     mywindow.document.write(`
         	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="http://localhost:8000/css/app.css">
@@ -175,12 +176,12 @@ function generatePDF() {
     mywindow.print();
 
 }
-async function uploadImage(base64Image, id, url = '/upload') {
+async function uploadImage(base64Image, id, path = '/upload') {
     let formData = new FormData()
     let blob = await fetch(base64Image)
         .then(res => res.blob())
     formData.append('image', blob)
-    let url = await fetch('/api' + url, {
+    let url = await fetch('/api' + path, {
         method: 'POST',
         body: formData,
         headers: {

@@ -52,7 +52,8 @@
 													flex-direction: column;
 													align-items: flex-end;
 													margin:15px 0">
-					<img style="width: 200px;  " alt="Preview" id="previewSignatureImage" />
+					<img style="width: 200px;  " alt="Preview" src="{{ asset('/white_bg.png') }}"
+						id="previewSignatureImage" />
 					<input onchange="angular.element(this).scope().selectSignatureImage(event)" type="file"
 						name="signature" id="applicantPhoto" />
 				</div>
@@ -367,6 +368,7 @@
 						</div>
 						<div class="applicantImageContainer">
 							<img src="@{{applicant.photo}}" alt="" class="applicantImage">
+							<img src="@{{applicant.signature}}" style="width: 100%;" alt="" class="applicantSignature">
 						</div>
 					</div>
 					<br><br>
