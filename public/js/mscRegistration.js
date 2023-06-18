@@ -111,24 +111,34 @@ angular.module('mscformApp', [])
 
                     let promises = [uploadImage(photo, newApplicant.data.id)]
 
-                    for (let research of $scope.researchHistory) {
-                        promises.push(fetch('/api/storeResearch', {
+                    for (let proposedResearch of $scope.proposedResearches) {
+                        promises.push(fetch('/api/storeProposedResearch', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                ...research,
+                                ...proposedResearch,
                                 'applicantId': newApplicant.data.id,
                             })
-                        }).then(res => res.json())
-                            .then(data => {
-                                console.log(data)
-                                generatePDF()
+                        }))
+
+
+                    }
+                    for (let researchHistory of $scope.researchHistory) {
+                        promises.push(fetch('/api/storeResearchHistory', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                ...researchHistory,
+                                'applicantId': newApplicant.data.id,
                             })
-                        )
+                        }))
                     }
                     await Promise.all(promises)
+                    generatePDF()
                 })
         }
     })

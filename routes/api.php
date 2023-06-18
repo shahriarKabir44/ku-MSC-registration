@@ -22,4 +22,6 @@ Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'upload'])
 
 Route::post('/confirmSubmission', [\App\Http\Controllers\ApplicantController::class, 'create']);
 
-Route::post('/storeResearch', [\App\Http\Controllers\ProposedResearchController::class, 'create']);
+Route::post('/storeResearchHistory', [\App\Http\Controllers\ResearchController::class, 'create']);
+
+Route::post('/storeProposedResearch', [\App\Http\Controllers\ProposedResearchController::class, 'create']);
