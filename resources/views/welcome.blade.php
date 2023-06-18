@@ -222,7 +222,7 @@
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" ng-model="research.supervisor1Position" id="">
+								type="text" ng-model="research.supervisorPosition" id="">
 						</td>
 						<td>
 							<input type="button" class="btn btn-danger" ng-click=" deleteResearch(research.index)"
@@ -405,7 +405,7 @@
 
 								</td>
 								<td>
-									@{{research.supervisor1Position}}
+									@{{research.supervisorPosition}}
 
 								</td>
 

@@ -34,9 +34,9 @@ return new class extends Migration {
             $table->string('ssc_passing_yr');
             $table->string('ssc_board_name');
             $table->string('ssc_GPA');
-            $table->string('companyName');
-            $table->string('companyPosition');
-            $table->string('joiningDate');
+            $table->string('companyName')->nullable();
+            $table->string('companyPosition')->nullable();
+            $table->string('joiningDate')->nullable();
 
             $table->timestamps();
         });

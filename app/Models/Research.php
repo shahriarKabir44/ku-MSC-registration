@@ -10,8 +10,9 @@ class Research extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'supervisorName',
-        'supervisor1Position',
-        'applicantId'
+        'publishingDate',
+        'publishedOn',
+        'applicantId',
+        'paperLink'
     ];
 }

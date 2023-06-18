@@ -40,7 +40,7 @@ angular.module('mscformApp', [])
                 index: $scope.researchHistory.length,
                 title: "",
                 supervisorName: "",
-                supervisor1Position: ""
+                supervisorPosition: ""
             })
         }
         $scope.deleteResearch = index => {
