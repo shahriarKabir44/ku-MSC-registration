@@ -11,13 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
 
-
-        Schema::create('research', function (Blueprint $table) {
+        Schema::create('proposed_research', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('publishingDate');
-            $table->string('publishedOn');
-            $table->string('paperLink');
+            $table->string('supervisorName');
+            $table->string('supervisorPosition');
             $table->integer('applicantId');
             $table->timestamps();
             $table->foreign('applicantId')
@@ -31,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('research');
+        Schema::dropIfExists('proposed_research');
     }
 };
