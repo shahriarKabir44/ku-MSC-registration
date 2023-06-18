@@ -45,6 +45,17 @@
 					<input onchange="angular.element(this).scope().selectImage(event)" type="file" name="photo"
 						id="applicantPhoto" />
 				</div>
+				<label for="photo">
+					Applicant's Signature <p style="font-size: 12px;">(The photo size will be 300px by 400px)</p>
+				</label>
+				<div style="display: flex;
+													flex-direction: column;
+													align-items: flex-end;
+													margin:15px 0">
+					<img style="width: 200px;  " alt="Preview" id="previewSignatureImage" />
+					<input onchange="angular.element(this).scope().selectSignatureImage(event)" type="file"
+						name="signature" id="applicantPhoto" />
+				</div>
 				<label for="name"> Applicant's name </label>
 				<input class="form-control" required ng-model="applicant.name" autocomplete="off" type="text" />
 				<label for="fatherName"> Father's name</label>

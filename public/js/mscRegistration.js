@@ -20,6 +20,7 @@ angular.module('mscformApp', [])
         $scope.applicant = {
             "photo": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             "name": "shahriar",
+            signatue: "",
             "programName": "",
             "fatherName": "abcd",
             "motherName": "abcd",
@@ -72,14 +73,25 @@ angular.module('mscformApp', [])
             console.log(JSON.stringify(keys))
             $('#myModal').modal('show')
         }
-
-        $scope.selectImage = (event) => {
+        $scope.selectSignatureImage = (event) => {
             let files = event.target.files;
             let reader = new FileReader();
             reader.onload = function (e) {
                 $scope.applicant.photo = e.target.result;
                 //  if ($scope.checkImageDimensions(e.target.result))
                 selectElement('previewImage').src = e.target.result;
+
+                $scope.$apply();
+            };
+            reader.readAsDataURL(files[0]);
+        }
+        $scope.selectImage = (event) => {
+            let files = event.target.files;
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $scope.applicant.signatue = e.target.result;
+                //  if ($scope.checkImageDimensions(e.target.result))
+                selectElement('previewSignatureImage').src = e.target.result;
 
                 $scope.$apply();
             };
@@ -97,8 +109,8 @@ angular.module('mscformApp', [])
             img.src = imgURL;
         }
         $scope.confirmSubmission = () => {
-            let photo = $scope.applicant.photo
-            let applicant = JSON.parse(JSON.stringify($scope.applicant))
+            let { signatue, photo } = $scope.applicant
+            let applicant = structuredClone($scope.applicant)
             applicant.photo = "abcd"
             fetch('/api/confirmSubmission', {
                 method: 'POST',
@@ -109,7 +121,7 @@ angular.module('mscformApp', [])
             }).then(res => res.json())
                 .then(async (newApplicant) => {
 
-                    let promises = [uploadImage(photo, newApplicant.data.id)]
+                    let promises = [uploadImage(photo, newApplicant.data.id), uploadImage(signatue, newApplicant.data.id, '/uploadSignature')]
 
                     for (let proposedResearch of $scope.proposedResearches) {
                         promises.push(fetch('/api/storeProposedResearch', {
@@ -163,12 +175,12 @@ function generatePDF() {
     mywindow.print();
 
 }
-async function uploadImage(base64Image, id) {
+async function uploadImage(base64Image, id, url = '/upload') {
     let formData = new FormData()
     let blob = await fetch(base64Image)
         .then(res => res.blob())
     formData.append('image', blob)
-    let url = await fetch('/api/upload', {
+    let url = await fetch('/api' + url, {
         method: 'POST',
         body: formData,
         headers: {
