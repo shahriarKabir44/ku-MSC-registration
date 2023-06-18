@@ -20,6 +20,7 @@ angular.module('mscformApp', [])
         $scope.applicant = {
             "photo": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             "name": "shahriar",
+            "programName": "",
             "fatherName": "abcd",
             "motherName": "abcd",
             "gender": "male", "religion": "Hindu",
@@ -35,17 +36,33 @@ angular.module('mscformApp', [])
             "joiningDate": new Date(),
         }
         $scope.researchHistory = []
+        $scope.proposedResearches = []
         $scope.addResearch = () => {
             $scope.researchHistory.push({
                 index: $scope.researchHistory.length,
                 title: "",
-                supervisorName: "",
-                supervisorPosition: ""
+                publishingDate: "",
+                publishedOn: "",
+                paperLink: ""
             })
         }
         $scope.deleteResearch = index => {
             $scope.researchHistory = $scope.researchHistory.filter(research => research.index !== index);
         }
+
+
+        $scope.addProposedResearch = () => {
+            $scope.proposedResearches.push({
+                index: $scope.proposedResearches.length,
+                title: "",
+                supervisorName: "",
+                supervisorPosition: ""
+            })
+        }
+        $scope.deleteProposedResearch = index => {
+            $scope.proposedResearches = $scope.proposedResearches.filter(proposedResearch => proposedResearch.index !== index);
+        }
+
         $scope.submitMastersForm = () => {
             $scope.photo = null
             let keys = []

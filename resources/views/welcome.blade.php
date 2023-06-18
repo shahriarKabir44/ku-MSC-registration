@@ -20,18 +20,14 @@
 
 </head>
 
-<body class="container row" style="max-width: 60vw;
-	padding:20px;
-	margin: 50px auto; 
-	font-family: 'Times New Roman', Times, serif;
-	box-shadow: 0 0 10px #ff973466;" ng-app="mscformApp" ng-controller="msc-form-controller">
+<body class="container row" style="margin: 50px auto;" ng-app="mscformApp" ng-controller="msc-form-controller">
 	<div class="logoContainer">
 		<div class="ku_logo">
 			<img src="{{ asset('/ku_logo.png') }}" alt="" class="ku_logo_img">
 		</div>
 		<div class="pageHeadingTextContainer">
 			<h2>Khulna University</h2>
-			<h3>Master's Admission form</h3>
+			<h5>Master's, PhD, MPhil program Admission form</h5>
 		</div>
 	</div>
 	<form class="col-lg-12" ng-submit="submitMastersForm()">
@@ -91,6 +87,13 @@
 					<option value="ECE">ECE</option>
 					<option value="URP">URP</option>
 					<option value="Architecture">Architecture</option>
+				</select>
+				<label for="programName">Choose the Degree Program</label>
+				<select name="" required ng-model='applicant.programName' id="" class="form-control">
+					<option value="">choose one</option>
+					<option value="Master_s">Master's</option>
+					<option value="PhD">PhD</option>
+					<option value="MPhil">MPhil</option>
 				</select>
 			</div>
 		</div>
@@ -190,19 +193,21 @@
 				<input class="form-control" autocomplete="off" type="date" ng-model="applicant.joiningDate" id="">
 			</div>
 		</div>
-
 		<div class="inputGroup">
-			<h3 class="inputGroupHeader">Research <span style="font-size: 15px">(Optional)</span></h3>
+			<h3 class="inputGroupHeader">Research history <span
+					ng-if="applicant.programName=='Master_s' || applicant.programName==''"
+					style="font-size: 15px">(Optional)</span></h3>
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Research Field</th>
-						<th>Supevisor Name</th>
-						<th>Position of the Supervisor</th>
+						<th>Research Title</th>
+						<th>Publishing Date</th>
+						<th>Platform Published on</th>
+						<th>Paper Link</th>
 						<th>
 							<div style="display: flex;
-										align-items: flex-end;
-										gap: 10px;">
+													align-items: flex-end;
+													gap: 10px;">
 								<p>Action</p>
 								<input type="button" class="btn btn-primary" ng-click="addResearch()" value="Add">
 
@@ -227,6 +232,50 @@
 						<td>
 							<input type="button" class="btn btn-danger" ng-click=" deleteResearch(research.index)"
 								value="Remove">
+
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="inputGroup">
+			<h3 class="inputGroupHeader">Proposed Research <span style="font-size: 15px">(At least one)</span></h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Research Field</th>
+						<th>Supevisor Name</th>
+						<th>Position of the Supervisor</th>
+						<th>
+							<div style="display: flex;
+										align-items: flex-end;
+										gap: 10px;">
+								<p>Action</p>
+								<input type="button" class="btn btn-primary" ng-click="addProposedResearch()"
+									value="Add">
+
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="proposedResearche in proposedResearches" class="formTableRow">
+						<td>
+							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
+								type="text" ng-model="proposedResearche.title" id="">
+						</td>
+						<td>
+							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
+								type="text" ng-model="proposedResearche.supervisorName" id="">
+						</td>
+						<td>
+							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
+								type="text" ng-model="proposedResearche.supervisorPosition" id="">
+						</td>
+						<td>
+							<input type="button" class="btn btn-danger"
+								ng-click=" deleteProposedResearch(proposedResearche.index)" value="Remove">
 
 						</td>
 					</tr>

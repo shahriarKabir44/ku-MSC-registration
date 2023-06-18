@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->string('companyName')->nullable();
             $table->string('companyPosition')->nullable();
             $table->string('joiningDate')->nullable();
-
+            $table->string('programName');
             $table->timestamps();
         });
     }
