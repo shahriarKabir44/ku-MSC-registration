@@ -17,6 +17,7 @@ selectElement('previewImage').src = defaultPreviewImage
 
 angular.module('mscformApp', [])
     .controller('msc-form-controller', ($scope) => {
+        $scope.isPhotoChanged = [0, 0]
         $scope.applicant = {
             "photo": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             "name": "shahriar",
@@ -70,8 +71,29 @@ angular.module('mscformApp', [])
             for (let key in $scope.applicant) {
                 keys.push(key)
             }
-
-            $('#myModal').modal('show')
+            if ($scope.validateForm())
+                $('#myModal').modal('show')
+        }
+        $scope.validateForm = () => {
+            if ($scope.programName != "Master_s") {
+                if ($scope.researchHistory.length == 0) {
+                    alert("You must add at least one research paper");
+                    return 0
+                }
+            }
+            if ($scope.proposedResearches.length == 0) {
+                alert("You must add at least one research proposal");
+                return 0
+            }
+            if ($scope.isPhotoChanged[0] == 0) {
+                alert("You must add your photo");
+                return 0
+            }
+            if ($scope.isPhotoChanged[1] == 0) {
+                alert("You must add your signature");
+                return 0
+            }
+            return 1
         }
         $scope.selectSignatureImage = (event) => {
             let files = event.target.files;
@@ -80,6 +102,7 @@ angular.module('mscformApp', [])
                 $scope.applicant.signature = e.target.result;
                 //  if ($scope.checkImageDimensions(e.target.result))
                 selectElement('previewSignatureImage').src = e.target.result;
+                $scope.isPhotoChanged[1] = 1
 
                 $scope.$apply();
             };
@@ -92,6 +115,7 @@ angular.module('mscformApp', [])
                 $scope.applicant.photo = e.target.result;
                 //  if ($scope.checkImageDimensions(e.target.result))
                 selectElement('previewImage').src = e.target.result;
+                $scope.isPhotoChanged[0] = 1
 
                 $scope.$apply();
             };
