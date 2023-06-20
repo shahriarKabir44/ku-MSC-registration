@@ -18,8 +18,6 @@ return new class extends Migration {
             $table->string('supervisorPosition');
             $table->integer('applicantId');
             $table->timestamps();
-            $table->foreign('applicantId')
-                ->references('id')->on('applicants')->onDelete('cascade');
 
         });
     }
