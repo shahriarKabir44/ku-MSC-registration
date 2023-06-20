@@ -21,6 +21,7 @@ angular.module('mscformApp', [])
         $scope.applicant = {
             "photo": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             "name": "shahriar",
+            programName: "PhD",
             signatue: "",
             "programName": "",
             "fatherName": "abcd",
@@ -51,7 +52,16 @@ angular.module('mscformApp', [])
         $scope.deleteResearch = index => {
             $scope.researchHistory = $scope.researchHistory.filter(research => research.index !== index);
         }
+        $scope.reformatPaperDates = () => {
+            for (let paper of $scope.researchHistory) {
+                let date = new Date(paper.publishingDate).toDateString()
+                paper.publishingDate = date
+            }
+        }
 
+        $scope.reformatDates = () => {
+
+        }
 
         $scope.addProposedResearch = () => {
             $scope.proposedResearches.push({
@@ -71,8 +81,8 @@ angular.module('mscformApp', [])
             for (let key in $scope.applicant) {
                 keys.push(key)
             }
-            if ($scope.validateForm())
-                $('#myModal').modal('show')
+            //if ($scope.validateForm())
+            $('#myModal').modal('show')
         }
         $scope.validateForm = () => {
             if ($scope.programName != "Master_s") {

@@ -13,8 +13,21 @@
      border-radius: 5px;
  }
 
+ .photosContainer {
+
+     display: grid;
+     grid-template-columns: 50% 50%;
+ }
+
  h2 {
      text-align: center;
+ }
+
+ .imageInputContainer {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     align-items: center;
  }
 
  label {
@@ -95,11 +108,16 @@
  }
 
  .applicantImageContainer {
+     display: flex;
      width: inherit;
+     flex-direction: column;
+     align-items: center;
+     gap: 10px;
+     justify-content: center;
  }
 
  img.applicantImage {
-     width: 100%;
+     width: 150px;
  }
 
  .logoContainer {

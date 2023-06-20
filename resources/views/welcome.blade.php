@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Master's form</title>
+	<title>Application form</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -35,28 +35,8 @@
 		<div class="inputGroup">
 			<h3 class="inputGroupHeader">Personal Information</h3>
 			<div class="gridContainer">
-				<label for="photo">
-					Applicant's Photo <p style="font-size: 12px;">(The photo size will be 300px by 400px)</p> </label>
-				<div style="display: flex;
-									flex-direction: column;
-									align-items: flex-end;
-									margin:15px 0">
-					<img style="width: 200px;  " alt="Preview" id="previewImage" />
-					<input onchange="angular.element(this).scope().selectImage(event)" type="file" name="photo"
-						id="applicantPhoto" />
-				</div>
-				<label for="photo">
-					Applicant's Signature <p style="font-size: 12px;">(The photo size will be 300px by 400px)</p>
-				</label>
-				<div style="display: flex;
-													flex-direction: column;
-													align-items: flex-end;
-													margin:15px 0">
-					<img style="width: 200px;  " alt="Preview" src="{{ asset('/white_bg.png') }}"
-						id="previewSignatureImage" />
-					<input onchange="angular.element(this).scope().selectSignatureImage(event)" type="file"
-						name="signature" id="applicantPhoto" />
-				</div>
+
+
 				<label for="name"> Applicant's name </label>
 				<input class="form-control" required ng-model="applicant.name" autocomplete="off" type="text" />
 				<label for="fatherName"> Father's name</label>
@@ -101,7 +81,7 @@
 					<option value="Architecture">Architecture</option>
 				</select>
 				<label for="programName">Choose the Degree Program</label>
-				<select name="" required ng-model='applicant.programName' id="" class="form-control">
+				<select name="" required ng-model='applicant.programName' class="form-control">
 					<option value="">choose one</option>
 					<option value="Master_s">Master's</option>
 					<option value="PhD">PhD</option>
@@ -195,7 +175,7 @@
 			</table>
 		</div>
 		<div class="inputGroup">
-			<h3 class="inputGroupHeader">Employment Status <span style="font-size: 15px">(Optional)</span></h3>
+			<h3 class="inputGroupHeader">Employment Status (If any) <span style="font-size: 15px">(Optional)</span></h3>
 			<div class="gridContainer">
 				<label for="companyName">Company / institute name</label>
 				<input class="form-control" autocomplete="off" type="text" ng-model="applicant.companyName" id="">
@@ -299,6 +279,38 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="inputGroup">
+			<h3 class="inputGroupHeader">Photo</h3>
+			<div class="photosContainer">
+				<div class="userPhotoInputContainer imageInputContainer">
+					<label for="photo">
+						Applicant's Photo <p style="font-size: 12px;">(The photo size will be 300px by 300px)</p>
+					</label>
+					<div style="display: flex;
+														flex-direction: column;
+														align-items: flex-end;
+														margin:15px 0">
+						<img style="width: 200px; height: 200px; " alt="Preview" id="previewImage" />
+						<input onchange="angular.element(this).scope().selectImage(event)" type="file" name="photo"
+							id="applicantPhoto" />
+					</div>
+				</div>
+				<div class="userSignatureContainer imageInputContainer">
+					<label for="photo">
+						Applicant's Signature
+					</label>
+					<div style="display: flex;
+																		flex-direction: column;
+																		align-items: flex-end;
+																		margin:15px 0">
+						<img style="width: 200px;  " alt="Preview" src="{{ asset('/white_bg.png') }}"
+							id="previewSignatureImage" />
+						<input onchange="angular.element(this).scope().selectSignatureImage(event)" type="file"
+							name="signature" id="applicantPhoto" />
+					</div>
+				</div>
+			</div>
+		</div>
 		<button type="submit" style="width: 100%" class="btn btn-primary ">Apply</button>
 	</form>
 
@@ -320,7 +332,7 @@
 						</div>
 						<div class="pageHeadingTextContainer">
 							<h2>Khulna University</h2>
-							<h3>Master's Admission form</h3>
+							<h5>Master's, PhD, MPhil program Admission form</h5>
 						</div>
 					</div>
 					<h3>Personal Information</h3>
@@ -368,7 +380,7 @@
 						</div>
 						<div class="applicantImageContainer">
 							<img src="@{{applicant.photo}}" alt="" class="applicantImage">
-							<img src="@{{applicant.signature}}" style="width: 100%;" alt="" class="applicantSignature">
+							<img src="@{{applicant.signature}}" style="width: 150px;" alt="" class="applicantSignature">
 						</div>
 					</div>
 					<br><br>
@@ -376,6 +388,10 @@
 						<tr>
 							<th>Discipline Applying to:</th>
 							<th colspan="4">@{{applicant.discipline}}</th>
+						</tr>
+						<tr>
+							<th>Degree Applying for:</th>
+							<th colspan="4">@{{applicant.programName}}</th>
 						</tr>
 					</table>
 					<h3>Educational Information</h3>
