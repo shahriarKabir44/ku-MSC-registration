@@ -175,7 +175,7 @@
 			</table>
 		</div>
 		<div class="inputGroup">
-			<h3 class="inputGroupHeader">Employment Status (If any) <span style="font-size: 15px">(Optional)</span></h3>
+			<h3 class="inputGroupHeader">Employment Status <span style="font-size: 15px">(Optional)</span></h3>
 			<div class="gridContainer">
 				<label for="companyName">Company / institute name</label>
 				<input class="form-control" autocomplete="off" type="text" ng-model="applicant.companyName" id="">
@@ -451,8 +451,8 @@
 
 						</tbody>
 					</table>
-					<h3>Employment history</h3>
-					<table class="table table-striped">
+					<h3 ng-if="applicant.companyName!=null">Employment history</h3>
+					<table ng-if="applicant.companyName!=null" class=" table table-striped">
 						<tr>
 							<th>Company / institute name</th>
 							<td colspan="4">@{{applicant.companyName}}</td>
@@ -536,6 +536,25 @@
 		</div>
 	</div>
 
+
+	<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Successfully Applied</h4>
+				</div>
+				<div class="modal-body">
+					Click "Print" to print the submitted form
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button class="btn btn-primary" onclick="generatePDF()">Print</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script defer src="{{ asset('js/mscRegistration.js') }}"></script>
 
 

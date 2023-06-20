@@ -35,8 +35,7 @@ angular.module('mscformApp', [])
             "hons_passing_yr": 1111,
             "hons_university": "111", "hons_GPA": 111, "hsc_GPA": 11111, "hsc_board_name": "111",
             "hsc_passing_yr": 111, "ssc_passing_yr": 111, "ssc_board_name": "1", "ssc_GPA": 111,
-            "companyName": "111", "companyPosition": "111",
-            "joiningDate": new Date(),
+
         }
         $scope.researchHistory = []
         $scope.proposedResearches = []
@@ -60,6 +59,10 @@ angular.module('mscformApp', [])
         }
 
         $scope.reformatDates = () => {
+            $scope.reformatPaperDates()
+            $scope.applicant.birthDate = new Date($scope.applicant.birthDate).toDateString()
+            if ($scope.applicant.joiningDate)
+                $scope.applicant.joiningDate = new Date($scope.applicant.joiningDate).toDateString()
 
         }
 
@@ -76,11 +79,8 @@ angular.module('mscformApp', [])
         }
 
         $scope.submitMastersForm = () => {
-            $scope.photo = null
-            let keys = []
-            for (let key in $scope.applicant) {
-                keys.push(key)
-            }
+
+            $scope.reformatDates()
             //if ($scope.validateForm())
             $('#myModal').modal('show')
         }
@@ -185,7 +185,8 @@ angular.module('mscformApp', [])
                         }))
                     }
                     await Promise.all(promises)
-                    generatePDF()
+                    $('#confirmationModal').modal('show')
+
                 })
         }
     })
