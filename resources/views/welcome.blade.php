@@ -133,7 +133,7 @@
 						<td>
 
 							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="number" ng-model="applicant.hons_GPA" id="">
+								type="text" ng-model="applicant.hons_GPA" id="">
 						</td>
 
 					</tr>
@@ -145,12 +145,26 @@
 								type="number" ng-model="applicant.hsc_passing_yr" id="">
 						</td>
 						<td>
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="text" ng-model="applicant.hsc_board_name" id="">
+
+							<select class="tableInput form-control" name="" required ng-model="applicant.hsc_board_name"
+								id="">
+
+								<option value="">Select one</option>
+								<option value="Barisal">Barisal</option>
+								<option value="Dhaka">Dhaka</option>
+								<option value="Rajshahi"> Rajshahi</option>
+								<option value="Comilla">Comilla</option>
+								<option value="Jessore">Jessore</option>
+								<option value="Chittagong">Chittagong</option>
+								<option value="Sylhet">Sylhet</option>
+								<option value="Dinajpur">Dinajpur</option>
+								<option value="	Madrasah">Madrasah</option>
+
+							</select>
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="number" ng-model="applicant.hsc_GPA" id="">
+								type="text" ng-model="applicant.hsc_GPA" id="">
 						</td>
 
 					</tr>
@@ -161,12 +175,26 @@
 								type="number" ng-model="applicant.ssc_passing_yr" id="">
 						</td>
 						<td>
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="text" ng-model="applicant.ssc_board_name" id="">
+							<select class="tableInput form-control" name="" required ng-model="applicant.ssc_board_name"
+								id="">
+
+								<option value="">Select one</option>
+								<option value="Barisal">Barisal</option>
+								<option value="Dhaka">Dhaka</option>
+								<option value="Rajshahi"> Rajshahi</option>
+								<option value="Comilla">Comilla</option>
+								<option value="Jessore">Jessore</option>
+								<option value="Chittagong">Chittagong</option>
+								<option value="Sylhet">Sylhet</option>
+								<option value="Dinajpur">Dinajpur</option>
+								<option value="	Madrasah">Madrasah</option>
+
+							</select>
+
 						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="number" ng-model="applicant.ssc_GPA" id="">
+								type="text" ng-model="applicant.ssc_GPA" id="">
 						</td>
 
 					</tr>
@@ -188,7 +216,10 @@
 		<div class="inputGroup">
 			<h3 class="inputGroupHeader">Research history <span
 					ng-if="applicant.programName=='Master_s' || applicant.programName==''"
-					style="font-size: 15px">(Optional)</span></h3>
+					style="font-size: 15px">(Optional)</span>
+				<span ng-if="!(applicant.programName=='Master_s' || applicant.programName=='')"
+					style="font-size: 15px">(At least one)</span>
+			</h3>
 			<table class="table table-striped">
 				<thead>
 					<tr>

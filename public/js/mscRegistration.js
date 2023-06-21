@@ -7,13 +7,6 @@ function selectElement(id) {
 selectElement('previewImage').src = defaultPreviewImage
 
 
-// selectElement('applicantPhoto').onchange = e => {
-//     const fileObj = e.target.files && e.target.files[0];
-//     if (!fileObj) {
-//         return;
-//     }
-//     selectElement('previewImage').src = URL.createObjectURL(fileObj)
-// }
 
 angular.module('mscformApp', [])
     .controller('msc-form-controller', ($scope) => {
@@ -24,17 +17,17 @@ angular.module('mscformApp', [])
             programName: "PhD",
             signatue: "",
             "programName": "",
-            "fatherName": "abcd",
-            "motherName": "abcd",
+            "fatherName": "Shahjahan kabir",
+            "motherName": "Shahida Kabir",
             "gender": "male", "religion": "Hindu",
             "email": "shahriar1904@cseku.ac.bd", "phone": "01631560063",
             "permanentAddress": "Khan Bahadur Ahsanulla Hall, Khulna University, Khulna",
             "birthDate": new Date(),
-            "nationality": "weeqw", "discipline": "URP",
-            "presentAddress": "111",
-            "hons_passing_yr": 1111,
-            "hons_university": "111", "hons_GPA": 111, "hsc_GPA": 11111, "hsc_board_name": "111",
-            "hsc_passing_yr": 111, "ssc_passing_yr": 111, "ssc_board_name": "1", "ssc_GPA": 111,
+            "nationality": "Bangladeshi", "discipline": "URP",
+            "presentAddress": "Khan Bahadur Ahsanulla Hall, Khulna University, Khulna",
+            "hons_passing_yr": 2024,
+            "hons_university": "Khulna University", "hons_GPA": 3.99, "hsc_GPA": 5.00, "hsc_board_name": "",
+            "hsc_passing_yr": 2011, "ssc_passing_yr": 2014, "ssc_board_name": "", "ssc_GPA": 5.00,
 
         }
         $scope.researchHistory = []
@@ -81,8 +74,8 @@ angular.module('mscformApp', [])
         $scope.submitMastersForm = () => {
 
             $scope.reformatDates()
-            //if ($scope.validateForm())
-            $('#myModal').modal('show')
+            if ($scope.validateForm())
+                $('#myModal').modal('show')
         }
         $scope.validateForm = () => {
             if ($scope.programName != "Master_s") {
@@ -110,7 +103,7 @@ angular.module('mscformApp', [])
             let reader = new FileReader();
             reader.onload = function (e) {
                 $scope.applicant.signature = e.target.result;
-                //  if ($scope.checkImageDimensions(e.target.result))
+                //if ($scope.checkSignatureImageDimensions(e.target.result))
                 selectElement('previewSignatureImage').src = e.target.result;
                 $scope.isPhotoChanged[1] = 1
 
@@ -123,7 +116,7 @@ angular.module('mscformApp', [])
             let reader = new FileReader();
             reader.onload = function (e) {
                 $scope.applicant.photo = e.target.result;
-                //  if ($scope.checkImageDimensions(e.target.result))
+                //if ($scope.checkImageDimensions(e.target.result))
                 selectElement('previewImage').src = e.target.result;
                 $scope.isPhotoChanged[0] = 1
 
@@ -134,7 +127,18 @@ angular.module('mscformApp', [])
         $scope.checkImageDimensions = function (imgURL) {
             let img = new Image();
             img.onload = () => {
-                if (img.width == 300 && img.height == 400) {
+                if (img.width == 300 && img.height == 300) {
+                    return 1
+                }
+                alert("The image dimension is incorrect!");
+                return 0
+            }
+            img.src = imgURL;
+        }
+        $scope.checkSignatureImageDimensions = function (imgURL) {
+            let img = new Image();
+            img.onload = () => {
+                if (img.width == 300 && img.height == 300) {
                     return 1
                 }
                 alert("The image dimension is incorrect!");
