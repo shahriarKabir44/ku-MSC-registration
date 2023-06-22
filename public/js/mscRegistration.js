@@ -153,7 +153,7 @@ angular.module('mscformApp', [])
             let applicant = structuredClone($scope.applicant)
             applicant.photo = "abcd"
             applicant.signatue = "wfhwei"
-            fetch('/api/confirmSubmission', {
+            fetch('/api/createApplicant', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

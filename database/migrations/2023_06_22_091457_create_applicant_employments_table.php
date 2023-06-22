@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +12,10 @@ return new class extends Migration
     {
         Schema::create('applicant_employments', function (Blueprint $table) {
             $table->id();
+            $table->string('companyName');
+            $table->string('companyPosition');
+            $table->string('joiningDate');
+            $table->string('endingDate');
             $table->timestamps();
         });
     }

@@ -21,8 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/upload', [\App\Http\Controllers\ImageController::class, 'upload']);
 Route::post('/uploadSignature', [\App\Http\Controllers\ImageController::class, 'uploadSignature']);
 
-Route::post('/confirmSubmission', [\App\Http\Controllers\ApplicantController::class, 'create']);
+Route::post('/createApplicant', [\App\Http\Controllers\ApplicantController::class, 'create']);
 
 Route::post('/storeResearchHistory', [\App\Http\Controllers\ResearchController::class, 'create']);
 
 Route::post('/storeProposedResearch', [\App\Http\Controllers\ProposedResearchController::class, 'create']);
+
+Route::post('/addApplicantEducation', [\App\Http\Controllers\ApplicantEducationController::class, 'create']);
+Route::post('/addApplicantEmployee', [\App\Http\Controllers\ProposedResearchController::class, 'create']);
