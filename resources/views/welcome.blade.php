@@ -214,7 +214,7 @@
 			</div>
 		</div>
 		<div class="inputGroup">
-			<h3 class="inputGroupHeader">Research history <span
+			<h3 class="inputGroupHeader">Published Research <span
 					ng-if="applicant.programName=='Master_s' || applicant.programName==''"
 					style="font-size: 15px">(Optional)</span>
 				<span ng-if="!(applicant.programName=='Master_s' || applicant.programName=='')"

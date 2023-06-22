@@ -30,6 +30,8 @@ angular.module('mscformApp', [])
             "hsc_passing_yr": 2011, "ssc_passing_yr": 2014, "ssc_board_name": "", "ssc_GPA": 5.00,
 
         }
+        $scope.checkEmployment = () => {
+        }
         $scope.researchHistory = []
         $scope.proposedResearches = []
         $scope.addResearch = () => {

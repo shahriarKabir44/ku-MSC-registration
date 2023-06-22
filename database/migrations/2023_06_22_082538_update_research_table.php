@@ -10,17 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-
-
-        Schema::create('research', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('publishingDate');
-            $table->string('paperLink');
-            $table->integer('applicantId');
-            $table->timestamps();
-
-
+        Schema::table('research', function (Blueprint $table) {
+            $table->string("publicationType");
+            $table->string("researchType");
         });
     }
 
@@ -29,6 +21,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('research');
+        Schema::table('research', function (Blueprint $table) {
+
+        });
     }
 };
