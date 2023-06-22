@@ -12,6 +12,19 @@ return new class extends Migration {
     {
         Schema::table('applicants', function (Blueprint $table) {
             $table->string("bengaliName");
+
+            $table->dropColumn('hons_passing_yr');
+            $table->dropColumn('hons_university');
+            $table->dropColumn('hons_GPA');
+            $table->dropColumn('hsc_GPA');
+            $table->dropColumn('hsc_board_name');
+            $table->dropColumn('hsc_passing_yr');
+            $table->dropColumn('ssc_passing_yr');
+            $table->dropColumn('ssc_board_name');
+            $table->dropColumn('ssc_GPA');
+            $table->dropColumn('companyName');
+            $table->dropColumn('companyPosition');
+            $table->dropColumn('joiningDate');
         });
     }
 
@@ -21,15 +34,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('applicants', function (Blueprint $table) {
-            $table->string('hons_passing_yr');
-            $table->string('hons_university');
-            $table->string('hons_GPA');
-            $table->string('hsc_GPA');
-            $table->string('hsc_board_name');
-            $table->string('hsc_passing_yr');
-            $table->string('ssc_passing_yr');
-            $table->string('ssc_board_name');
-            $table->string('ssc_GPA');
+
         });
     }
 };
