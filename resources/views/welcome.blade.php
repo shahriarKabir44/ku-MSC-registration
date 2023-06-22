@@ -110,94 +110,91 @@
 				<thead>
 
 					<tr class="formTableRow">
-						<th></th>
-						<th>Passing year</th>
+						<th>Exam/Degree</th>
 						<th>Board / university</th>
-						<th>GPA</th>
+						<th>Subject</th>
+						<th>Passing year</th>
+						<th>GPA/Result</th>
+						<th>Scored Out of:</th>
+						<th>
+							<div style="display: flex;
+																			align-items: flex-end;
+																			gap: 10px;">
+								<p>Action</p>
+								<input type="button" class="btn btn-primary" ng-click="addEducationHistory()"
+									value="Add">
+
+							</div>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="formTableRow">
-						<th>
-							Bachelor's / Equivalent
+					<tr class="formTableRow" ng-repeat="educationHistory in educationHistories">
+						<th ng-if="educationHistory.index<3"> @{{educationHistory.examName}} </th>
+						<td ng-if="educationHistory.index>=3">
+							<select name="" ng-model="educationHistory.examName" id="">
+								<option value="">Please select</option>
+
+								<option value="Master_s">Master's</option>
+								<option value="PhD">PhD</option>
+								<option value="MPhil">MPhil</option>
+							</select>
+						</td>
+
+						<td ng-if="educationHistory.index<2">
+
+							<select class="tableInput form-control" name="" required
+								ng-model="educationHistory.board_university" id="">
+
+								<option value="">Select one</option>
+								<option value="Barisal">Barisal</option>
+								<option value="Dhaka">Dhaka</option>
+								<option value="Rajshahi"> Rajshahi</option>
+								<option value="Comilla">Comilla</option>
+								<option value="Jessore">Jessore</option>
+								<option value="Chittagong">Chittagong</option>
+								<option value="Sylhet">Sylhet</option>
+								<option value="Dinajpur">Dinajpur</option>
+								<option value="	Madrasah">Madrasah</option>
+
+							</select>
+						</td>
+						<td ng-if="educationHistory.index>=2">
+							<input type="text" name="" ng-model="educationHistory.board_university" id="">
+						</td>
+						<td ng-if="educationHistory.index<2">
+
+							<select class="tableInput form-control" name="" required ng-model="educationHistory.subject"
+								id="">
+
+								<option value="">Select one</option>
+								<option value="Science">Science</option>
+								<option value="Arts">Arts</option>
+								<option value="Commerce"> Commerce</option>
+
+							</select>
+						</td>
+						<td ng-if="educationHistory.index>=2">
+							<input type="text" name="" ng-model="educationHistory.subject" id="">
+						</td>
 						</th>
 						<td>
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="number" ng-model="applicant.hons_passing_yr" id="">
-						</td>
-						<td>
+							<input type="text" name="" ng-model="educationHistory.passingYear" id="">
 
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="text" ng-model="applicant.hons_university" id="">
 						</td>
-						<td>
+						<th>
+							<input type="text" name="" ng-model="educationHistory.result" id="">
 
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="text" ng-model="applicant.hons_GPA" id="">
-						</td>
+						</th>
+						<th>
+							<input type="text" name="" ng-model="educationHistory.scored_out_of" id="">
+
+						</th>
+						<th> <button ng-disabled="educationHistory.index<3" class="btn btn-disabled"
+								ng-click="deleteEducationHistory(educationHistory.index)">Delete</button> </th>
 
 					</tr>
 
-					<tr class="formTableRow">
-						<th>HSC / Equivalent</th>
-						<td>
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="number" ng-model="applicant.hsc_passing_yr" id="">
-						</td>
-						<td>
-
-							<select class="tableInput form-control" name="" required ng-model="applicant.hsc_board_name"
-								id="">
-
-								<option value="">Select one</option>
-								<option value="Barisal">Barisal</option>
-								<option value="Dhaka">Dhaka</option>
-								<option value="Rajshahi"> Rajshahi</option>
-								<option value="Comilla">Comilla</option>
-								<option value="Jessore">Jessore</option>
-								<option value="Chittagong">Chittagong</option>
-								<option value="Sylhet">Sylhet</option>
-								<option value="Dinajpur">Dinajpur</option>
-								<option value="	Madrasah">Madrasah</option>
-
-							</select>
-						</td>
-						<td>
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="text" ng-model="applicant.hsc_GPA" id="">
-						</td>
-
-					</tr>
-					<tr class="formTableRow">
-						<th>SSC / Equivalent</th>
-						<td>
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="number" ng-model="applicant.ssc_passing_yr" id="">
-						</td>
-						<td>
-							<select class="tableInput form-control" name="" required ng-model="applicant.ssc_board_name"
-								id="">
-
-								<option value="">Select one</option>
-								<option value="Barisal">Barisal</option>
-								<option value="Dhaka">Dhaka</option>
-								<option value="Rajshahi"> Rajshahi</option>
-								<option value="Comilla">Comilla</option>
-								<option value="Jessore">Jessore</option>
-								<option value="Chittagong">Chittagong</option>
-								<option value="Sylhet">Sylhet</option>
-								<option value="Dinajpur">Dinajpur</option>
-								<option value="	Madrasah">Madrasah</option>
-
-							</select>
-
-						</td>
-						<td>
-							<input placeholder="Type here" autocomplete="off" required class="tableInput form-control"
-								type="text" ng-model="applicant.ssc_GPA" id="">
-						</td>
-
-					</tr>
 
 				</tbody>
 			</table>

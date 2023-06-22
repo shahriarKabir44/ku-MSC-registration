@@ -32,6 +32,55 @@ angular.module('mscformApp', [])
         }
         $scope.checkEmployment = () => {
         }
+        $scope.educationHistories = [
+            {
+                examName: 'SSC',
+                board_university: "",
+                subject: "",
+                result: "",
+                scored_out_of: "",
+                passingYear: "",
+                index: 0,
+                scored_out_of: ""
+            },
+            {
+                examName: 'HSC',
+                board_university: "",
+                subject: "",
+                result: "",
+                scored_out_of: "",
+                passingYear: "",
+                index: 1,
+                scored_out_of: ""
+            },
+            {
+                examName: "Bachelor's",
+                board_university: "",
+                subject: "",
+                result: "",
+                scored_out_of: "",
+                passingYear: "",
+                index: 2,
+                scored_out_of: ""
+
+            },
+        ]
+        $scope.deleteEducationHistory = index => {
+            $scope.educationHistories = $scope.educationHistories.filter(educationHistory =>
+                educationHistory.index != index)
+        }
+        $scope.addEducationHistory = () => {
+            $scope.educationHistories.push({
+                examName: '',
+                board_university: "",
+                subject: "",
+                result: "",
+                scored_out_of: "",
+                passingYear: "",
+                index: $scope.educationHistories.length,
+                scored_out_of: ""
+            })
+        }
         $scope.researchHistory = []
         $scope.proposedResearches = []
         $scope.addResearch = () => {
@@ -148,6 +197,37 @@ angular.module('mscformApp', [])
             }
             img.src = imgURL;
         }
+
+        $scope.storeProposedResearch = (promises) => {
+            for (let proposedResearch of $scope.proposedResearches) {
+                promises.push(fetch('/api/storeProposedResearch', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...proposedResearch,
+                        'applicantId': newApplicant.data.id,
+                    })
+                }))
+
+
+            }
+        }
+        $scope.storeResearchHistory = promises => {
+            for (let researchHistory of $scope.researchHistory) {
+                promises.push(fetch('/api/storeResearchHistory', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...researchHistory,
+                        'applicantId': newApplicant.data.id,
+                    })
+                }))
+            }
+        }
         $scope.confirmSubmission = () => {
             let { signatue, photo } = $scope.applicant
             let applicant = structuredClone($scope.applicant)
@@ -163,33 +243,9 @@ angular.module('mscformApp', [])
                 .then(async (newApplicant) => {
 
                     let promises = [uploadImage(photo, newApplicant.data.id), uploadImage(signatue, newApplicant.data.id, '/uploadSignature')]
+                    $scope.storeProposedResearch(promises)
+                    $scope.storeResearchHistory()
 
-                    for (let proposedResearch of $scope.proposedResearches) {
-                        promises.push(fetch('/api/storeProposedResearch', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                ...proposedResearch,
-                                'applicantId': newApplicant.data.id,
-                            })
-                        }))
-
-
-                    }
-                    for (let researchHistory of $scope.researchHistory) {
-                        promises.push(fetch('/api/storeResearchHistory', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                ...researchHistory,
-                                'applicantId': newApplicant.data.id,
-                            })
-                        }))
-                    }
                     await Promise.all(promises)
                     $('#confirmationModal').modal('show')
 
