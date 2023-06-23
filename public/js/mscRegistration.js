@@ -30,7 +30,28 @@ angular.module('mscformApp', [])
             "hsc_passing_yr": 2011, "ssc_passing_yr": 2014, "ssc_board_name": "", "ssc_GPA": 5.00,
 
         }
-        $scope.checkEmployment = () => {
+        $scope.employments = []
+        $scope.addEmployment = () => {
+            $scope.employments.push({
+                index: $scope.employments.length + 1,
+                companyName: "",
+                companyPosition: "",
+                joiningDate: "",
+                endingDate: "",
+                isCurrentlyWorking: false
+            })
+        }
+        $scope.removeEmployment = (index) => {
+            $scope.employments = $scope.employments.filter(employment =>
+                employment.index != index)
+        }
+        $scope.setCurrentlyWorkingFlag = employment => {
+            employment.isCurrentlyWorking = true
+            employment.endingDate = ''
+        }
+
+        $scope.setJoiningDate = employment => {
+            employment.isCurrentlyWorking = false
         }
         $scope.educationHistories = [
             {

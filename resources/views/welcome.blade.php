@@ -34,7 +34,7 @@
 		@csrf
 		<div class="inputGroup">
 			<h3 class="inputGroupHeader">Personal Information</h3>
-			<div class="gridContainer">
+			<div class="gridContainer personalInfoContainer">
 
 
 				<label for="name"> Applicant's name </label>
@@ -201,14 +201,58 @@
 		</div>
 		<div class="inputGroup">
 			<h3 class="inputGroupHeader">Employment Status <span style="font-size: 15px">(Optional)</span></h3>
-			<div class="gridContainer">
-				<label for="companyName">Company / institute name</label>
-				<input class="form-control" autocomplete="off" type="text" ng-model="applicant.companyName" id="">
-				<label for="companyPosition">Position</label>
-				<input class="form-control" autocomplete="off" type="text" ng-model="applicant.companyPosition" id="">
-				<label for="joiningDate">Joining date </label>
-				<input class="form-control" autocomplete="off" type="date" ng-model="applicant.joiningDate" id="">
-			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Company / institute name</th>
+						<th>Position</th>
+
+						<th>Joining date </th>
+						<th>Leaving date</th>
+						<th>
+							<div style="display: flex; align-items: flex-end;gap: 10px;">
+								<p>Action</p>
+								<input type="button" class="btn btn-primary" ng-click="addEmployment()" value="Add">
+
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="employment in employments">
+						<td>
+							<input type="text" required name="" ng-model="employment.companyName"
+								class="tableInput form-control" id="">
+						</td>
+						<td>
+							<input type="text" required name="" ng-model="employment.companyPosition"
+								class="tableInput form-control" id="">
+						</td>
+						<td>
+							<input type="date" required name="" ng-model="employment.joiningDate"
+								class="tableInput form-control" id="">
+						</td>
+						<td>
+
+							<input type="date" required name="" ng-change="setJoiningDate(employment)"
+								ng-model="employment.endingDate" class="tableInput form-control" id="">
+							<div style="display: flex;">
+								<input style="margin: 0;" type="checkbox"
+									ng-change="setCurrentlyWorkingFlag(employment)"
+									ng-model="employment.isCurrentlyWorking">
+								<label style="margin: 0;">Currently working</label>
+							</div>
+
+
+						</td>
+
+						<td>
+							<button class="btn btn-danger" ng-click="removeEmployment(employment.index)">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
 		</div>
 		<div class="inputGroup">
 			<h3 class="inputGroupHeader">Published Research <span
