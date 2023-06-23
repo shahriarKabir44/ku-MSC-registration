@@ -30,6 +30,8 @@ angular.module('mscformApp', [])
             "hsc_passing_yr": 2011, "ssc_passing_yr": 2014, "ssc_board_name": "", "ssc_GPA": 5.00,
 
         }
+
+        //employment info start
         $scope.employments = []
         $scope.addEmployment = () => {
             $scope.employments.push({
@@ -53,6 +55,26 @@ angular.module('mscformApp', [])
         $scope.setJoiningDate = employment => {
             employment.isCurrentlyWorking = false
         }
+        $scope.storeEmploymentInfo = (applicantId, promises) => {
+            for (let employment in $scope.employments) {
+                promises.push(fetch('/api/addApplicantEmployment', {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...employment,
+                        applicantId
+                    })
+                }).then(res => res.json()).then(data => {
+                    console.log(data)
+                }))
+            }
+        }
+        //employment info end
+
+
+        //education info start
         $scope.educationHistories = [
             {
                 examName: 'SSC',
@@ -102,6 +124,26 @@ angular.module('mscformApp', [])
                 scored_out_of: ""
             })
         }
+
+        $scope.postApplicantEducationHistory = (applicantId, promises) => {
+            for (let educationHistory of $scope.educationHistories) {
+                educationHistory.passingYear = new Date(educationHistory.passingYear).toDateString()
+                promises.push(fetch('/api/addApplicantEducation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...educationHistory, applicantId
+                    })
+                }).then(res => res.json()).then(data => {
+                    console.log(data)
+                }))
+            }
+        }
+
+
+
         $scope.researchHistory = []
         $scope.proposedResearches = []
         $scope.addResearch = () => {
@@ -219,7 +261,7 @@ angular.module('mscformApp', [])
             img.src = imgURL;
         }
 
-        $scope.storeProposedResearch = (promises) => {
+        $scope.storeProposedResearch = (applicantId, promises) => {
             for (let proposedResearch of $scope.proposedResearches) {
                 promises.push(fetch('/api/storeProposedResearch', {
                     method: 'POST',
@@ -228,14 +270,16 @@ angular.module('mscformApp', [])
                     },
                     body: JSON.stringify({
                         ...proposedResearch,
-                        'applicantId': newApplicant.data.id,
+                        applicantId
                     })
+                }).then(res => res.json()).then(data => {
+                    console.log(data)
                 }))
 
 
             }
         }
-        $scope.storeResearchHistory = promises => {
+        $scope.storeResearchHistory = (applicantId, promises) => {
             for (let researchHistory of $scope.researchHistory) {
                 promises.push(fetch('/api/storeResearchHistory', {
                     method: 'POST',
@@ -244,7 +288,7 @@ angular.module('mscformApp', [])
                     },
                     body: JSON.stringify({
                         ...researchHistory,
-                        'applicantId': newApplicant.data.id,
+                        applicantId
                     })
                 }))
             }
@@ -264,9 +308,9 @@ angular.module('mscformApp', [])
                 .then(async (newApplicant) => {
 
                     let promises = [uploadImage(photo, newApplicant.data.id), uploadImage(signatue, newApplicant.data.id, '/uploadSignature')]
-                    $scope.storeProposedResearch(promises)
-                    $scope.storeResearchHistory()
-
+                    $scope.storeProposedResearch(newApplicant.data.id, promises)
+                    $scope.storeResearchHistory(newApplicant.data.id, promises)
+                    $scope.postApplicantEducationHistory(newApplicant.data.id, promises)
                     await Promise.all(promises)
                     $('#confirmationModal').modal('show')
 

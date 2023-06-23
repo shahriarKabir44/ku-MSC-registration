@@ -28,4 +28,4 @@ Route::post('/storeResearchHistory', [\App\Http\Controllers\ResearchController::
 Route::post('/storeProposedResearch', [\App\Http\Controllers\ProposedResearchController::class, 'create']);
 
 Route::post('/addApplicantEducation', [\App\Http\Controllers\ApplicantEducationController::class, 'create']);
-Route::post('/addApplicantEmployee', [\App\Http\Controllers\ProposedResearchController::class, 'create']);
+Route::post('/addApplicantEmployment', [\App\Http\Controllers\ApplicantEmploymentController::class, 'create']);
