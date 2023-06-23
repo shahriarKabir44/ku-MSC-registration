@@ -63,7 +63,7 @@ angular.module('mscformApp', [])
             employment.isCurrentlyWorking = false
         }
         $scope.storeEmploymentInfo = (applicantId, promises) => {
-            for (let employment in $scope.employments) {
+            for (let employment of $scope.employments) {
                 promises.push(fetch('/api/addApplicantEmployment', {
                     method: 'post',
                     headers: {
@@ -340,10 +340,10 @@ angular.module('mscformApp', [])
 function generatePDF() {
     const divElement = document.getElementById('pdfContainer');
 
-    let mywindow = window.open('', 'PRINT', 'height=650,width=1000,top=100,left=150');
+    let mywindow = window.open('', 'PRINT', 'height=650,width=1000,top=0,left=0');
 
     mywindow.document.write(`<html><head><title>Form info</title>`);
-    mywindow.document.write('</head><body style="margin:50px auto; max-width:100% !important;" >');
+    mywindow.document.write('</head><body style="margin:50px auto; width:950px !important;max-width:950px !important; " >');
     mywindow.document.write(`
         	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/app.css">
