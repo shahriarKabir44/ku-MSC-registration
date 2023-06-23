@@ -10,13 +10,12 @@ selectElement('previewImage').src = defaultPreviewImage
 
 angular.module('mscformApp', [])
     .controller('msc-form-controller', ($scope) => {
-        $scope.isPhotoChanged = [0, 0]
         $scope.applicant = {
             "photo": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             "name": "shahriar",
             programName: "PhD",
             signatue: "",
-            "programName": "",
+            bengaliName: "মোঃ শাহরিয়ার কবির",
             "fatherName": "Shahjahan kabir",
             "motherName": "Shahida Kabir",
             "gender": "male", "religion": "Hindu",
@@ -25,25 +24,30 @@ angular.module('mscformApp', [])
             "birthDate": new Date(),
             "nationality": "Bangladeshi", "discipline": "URP",
             "presentAddress": "Khan Bahadur Ahsanulla Hall, Khulna University, Khulna",
-            "hons_passing_yr": 2024,
-            "hons_university": "Khulna University", "hons_GPA": 3.99, "hsc_GPA": 5.00, "hsc_board_name": "",
-            "hsc_passing_yr": 2011, "ssc_passing_yr": 2014, "ssc_board_name": "", "ssc_GPA": 5.00,
 
         }
 
         //employment info start
         $scope.formatEmploymentDates = () => {
+            for (let employment of $scope.employments) {
+                console.log(employment)
+                employment.joiningDate = new Date(employment.joiningTime).toDateString()
+                if (employment.endingTime == '' || employment.endingTime == null) employment.endingDate = '--'
+                else employment.endingDate = new Date(employment.endingTime).toDateString()
 
+            }
         }
         $scope.employments = []
         $scope.addEmployment = () => {
             $scope.employments.push({
-                index: $scope.employments.length + 1,
+                index: $scope.employments.length,
                 companyName: "",
                 companyPosition: "",
                 joiningDate: "",
                 endingDate: "",
-                isCurrentlyWorking: true
+                isCurrentlyWorking: false,
+                joiningTime: "",
+                endingTime: ""
             })
         }
         $scope.removeEmployment = (index) => {
@@ -51,11 +55,11 @@ angular.module('mscformApp', [])
                 employment.index != index)
         }
         $scope.setCurrentlyWorkingFlag = employment => {
-            employment.isCurrentlyWorking = true
-            employment.endingDate = ''
+            $scope.employments[employment.index].isCurrentlyWorking = true
+            $scope.employments[employment.index].endingTime = ''
         }
 
-        $scope.setJoiningDate = employment => {
+        $scope.setLeavingDate = employment => {
             employment.isCurrentlyWorking = false
         }
         $scope.storeEmploymentInfo = (applicantId, promises) => {
@@ -81,33 +85,31 @@ angular.module('mscformApp', [])
         $scope.educationHistories = [
             {
                 examName: 'SSC',
-                board_university: "",
-                subject: "",
-                result: "",
-                scored_out_of: "",
-                passingYear: "",
+                board_university: "Dhaka",
+                subject: "Science",
+                result: "4.00",
+                scored_out_of: "5.00",
+                passingYear: "2016",
                 index: 0,
-                scored_out_of: ""
+
             },
             {
                 examName: 'HSC',
-                board_university: "",
-                subject: "",
-                result: "",
-                scored_out_of: "",
-                passingYear: "",
+                board_university: "Dhaka",
+                subject: "Science",
+                result: "4.00",
+                scored_out_of: "5.00",
+                passingYear: "2018",
                 index: 1,
-                scored_out_of: ""
             },
             {
                 examName: "Bachelor's",
-                board_university: "",
-                subject: "",
-                result: "",
-                scored_out_of: "",
-                passingYear: "",
+                board_university: "Dhaka Univerwsity",
+                subject: "Science",
+                result: "4.00",
+                scored_out_of: "4.00",
+                passingYear: "202023",
                 index: 2,
-                scored_out_of: ""
 
             },
         ]
@@ -130,7 +132,6 @@ angular.module('mscformApp', [])
 
         $scope.postApplicantEducationHistory = (applicantId, promises) => {
             for (let educationHistory of $scope.educationHistories) {
-                educationHistory.passingYear = new Date(educationHistory.passingYear).toDateString()
                 promises.push(fetch('/api/addApplicantEducation', {
                     method: 'POST',
                     headers: {
@@ -144,17 +145,19 @@ angular.module('mscformApp', [])
                 }))
             }
         }
+        //education history end
 
 
 
+
+        //research history start
         $scope.researchHistory = []
-        $scope.proposedResearches = []
         $scope.addResearch = () => {
             $scope.researchHistory.push({
                 index: $scope.researchHistory.length,
                 title: "",
                 publishingDate: "",
-                publishedOn: "",
+                publishingTime: "",
                 paperLink: ""
             })
         }
@@ -163,18 +166,29 @@ angular.module('mscformApp', [])
         }
         $scope.reformatPaperDates = () => {
             for (let paper of $scope.researchHistory) {
-                let date = new Date(paper.publishingDate).toDateString()
+                let date = new Date(paper.publishingTime).toDateString()
                 paper.publishingDate = date
             }
         }
-
-        $scope.reformatDates = () => {
-            $scope.reformatPaperDates()
-            $scope.applicant.birthDate = new Date($scope.applicant.birthDate).toDateString()
-            if ($scope.applicant.joiningDate)
-                $scope.applicant.joiningDate = new Date($scope.applicant.joiningDate).toDateString()
-
+        $scope.storeResearchHistory = (applicantId, promises) => {
+            for (let researchHistory of $scope.researchHistory) {
+                promises.push(fetch('/api/storeResearchHistory', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...researchHistory,
+                        applicantId
+                    })
+                }))
+            }
         }
+
+        //research history start
+
+        //proposed researches start
+        $scope.proposedResearches = []
 
         $scope.addProposedResearch = () => {
             $scope.proposedResearches.push({
@@ -187,34 +201,31 @@ angular.module('mscformApp', [])
         $scope.deleteProposedResearch = index => {
             $scope.proposedResearches = $scope.proposedResearches.filter(proposedResearch => proposedResearch.index !== index);
         }
+        $scope.storeProposedResearch = (applicantId, promises) => {
+            for (let proposedResearch of $scope.proposedResearches) {
+                promises.push(fetch('/api/storeProposedResearch', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...proposedResearch,
+                        applicantId
+                    })
+                }).then(res => res.json()).then(data => {
+                    console.log(data)
+                }))
 
-        $scope.submitMastersForm = () => {
 
-            $scope.reformatDates()
-            if ($scope.validateForm())
-                $('#myModal').modal('show')
+            }
         }
-        $scope.validateForm = () => {
-            if ($scope.programName != "Master_s") {
-                if ($scope.researchHistory.length == 0) {
-                    alert("You must add at least one research paper");
-                    return 0
-                }
-            }
-            if ($scope.proposedResearches.length == 0) {
-                alert("You must add at least one research proposal");
-                return 0
-            }
-            if ($scope.isPhotoChanged[0] == 0) {
-                alert("You must add your photo");
-                return 0
-            }
-            if ($scope.isPhotoChanged[1] == 0) {
-                alert("You must add your signature");
-                return 0
-            }
-            return 1
-        }
+        //proposed researches end
+
+
+
+        // images segment start
+        $scope.isPhotoChanged = [0, 0]
+
         $scope.selectSignatureImage = (event) => {
             let files = event.target.files;
             let reader = new FileReader();
@@ -263,38 +274,42 @@ angular.module('mscformApp', [])
             }
             img.src = imgURL;
         }
-
-        $scope.storeProposedResearch = (applicantId, promises) => {
-            for (let proposedResearch of $scope.proposedResearches) {
-                promises.push(fetch('/api/storeProposedResearch', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        ...proposedResearch,
-                        applicantId
-                    })
-                }).then(res => res.json()).then(data => {
-                    console.log(data)
-                }))
+        //images segment end
 
 
-            }
+        $scope.reformatDates = () => {
+            $scope.applicant.birthDate = new Date($scope.applicant.birthDate).toDateString()
+            $scope.reformatPaperDates()
+            $scope.formatEmploymentDates()
         }
-        $scope.storeResearchHistory = (applicantId, promises) => {
-            for (let researchHistory of $scope.researchHistory) {
-                promises.push(fetch('/api/storeResearchHistory', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        ...researchHistory,
-                        applicantId
-                    })
-                }))
+        $scope.submitMastersForm = () => {
+            $scope.applicant.name = $scope.applicant.name.toUpperCase();
+            $scope.applicant.fatherName = $scope.applicant.fatherName.toUpperCase();
+            $scope.applicant.motherName = $scope.applicant.motherName.toUpperCase();
+            $scope.reformatDates()
+            if ($scope.validateForm())
+                $('#myModal').modal('show')
+        }
+        $scope.validateForm = () => {
+            if ($scope.programName != "Master_s") {
+                if ($scope.researchHistory.length == 0) {
+                    alert("You must add at least one research paper");
+                    return 0
+                }
             }
+            if ($scope.proposedResearches.length == 0) {
+                alert("You must add at least one research proposal");
+                return 0
+            }
+            if ($scope.isPhotoChanged[0] == 0) {
+                alert("You must add your photo");
+                return 0
+            }
+            if ($scope.isPhotoChanged[1] == 0) {
+                alert("You must add your signature");
+                return 0
+            }
+            return 1
         }
         $scope.confirmSubmission = () => {
             let { signatue, photo } = $scope.applicant

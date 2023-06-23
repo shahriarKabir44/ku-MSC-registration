@@ -38,11 +38,16 @@
 
 
 				<label for="name"> Applicant's name </label>
-				<input class="form-control" required ng-model="applicant.name" autocomplete="off" type="text" />
+				<input class="form-control" style="text-transform: uppercase;" required ng-model="applicant.name"
+					autocomplete="off" type="text" />
+				<label for="name"> Applicant's name in bengali</label>
+				<input class="form-control" required ng-model="applicant.bengaliName" autocomplete="off" type="text" />
 				<label for="fatherName"> Father's name</label>
-				<input class="form-control" required ng-model="applicant.fatherName" autocomplete="off" type="text" />
+				<input class="form-control" style="text-transform: uppercase;" required ng-model="applicant.fatherName"
+					autocomplete="off" type="text" />
 				<label for="motherName"> Mother's name</label>
-				<input class="form-control" required ng-model="applicant.motherName" autocomplete="off" type="text" />
+				<input class="form-control" style="text-transform: uppercase;" required ng-model="applicant.motherName"
+					autocomplete="off" type="text" />
 				<label for="gender">Gender</label>
 				<select class="form-control" required ng-model="applicant.gender" id="">
 					<option value="">choose one</option>
@@ -60,8 +65,8 @@
 				<label for="email"> Email</label>
 				<input class="form-control" required ng-model="applicant.email" autocomplete="off" type="email" />
 				<label for="phone"> Phone </label>
-				<input class="form-control" placeholder="(+88)" required ng-model="applicant.phone" autocomplete="off"
-					type="text" />
+				<input class="form-control" placeholder="(+8801xxxxxxxxx)" required ng-model="applicant.phone"
+					autocomplete="off" type="text" />
 				<label for="dateOfBirth">Date of birth</label>
 				<input class="form-control" type="date" autocomplete="off" ng-model="applicant.birthDate" id="">
 				<label for="nationality">Nationality</label>
@@ -231,13 +236,13 @@
 								class="tableInput form-control" id="">
 						</td>
 						<td>
-							<input type="date" required name="" ng-model="employment.joiningDate"
+							<input type="date" required name="" ng-model="employment.joiningTime"
 								class="tableInput form-control" id="">
 						</td>
 						<td>
 
-							<input type="date" name="" ng-change="setJoiningDate(employment)"
-								ng-model="employment.endingDate" class="tableInput form-control" id="">
+							<input type="date" name="" ng-model="employment.endingTime"
+								ng-change="setLeavingDate(employment)" class="tableInput form-control" id="">
 							<div style="display: flex;">
 								<input style="margin: 0;" type="checkbox"
 									ng-change="setCurrentlyWorkingFlag(employment)"
@@ -293,15 +298,15 @@
 								<option value="Book">Book</option>
 								<option value="Other">Other</option>
 							</select>
+						</td>
+						<td>
+							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
+								type="text" ng-model="research.title" id="">
+						</td>
+						<td>
+							<input class="tableInput form-control" type="date" ng-model="research.publishingTime" id="">
+						</td>
 
-						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="date" ng-model="research.publishingDate" id="">
-						</td>
-						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" ng-model="research.publishedOn" id="">
-						</td>
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
 								type="text" ng-model="research.paperLink" id="">
@@ -378,7 +383,7 @@
 				</div>
 				<div class="userSignatureContainer imageInputContainer">
 					<label for="photo">
-						Applicant's Signature
+						Applicant's Signature <p style="font-size: 12px;">(The photo size will be 300px by 80px)</p>
 					</label>
 					<div style="display: flex;
 																		flex-direction: column;
@@ -423,6 +428,11 @@
 								<tr>
 									<th>Name</th>
 									<td colspan="4">@{{applicant.name}}</td>
+
+								</tr>
+								<tr>
+									<th>Name in bengali</th>
+									<td colspan="4">@{{applicant.bengaliName}}</td>
 
 								</tr>
 								<tr>
@@ -480,86 +490,78 @@
 						<thead>
 
 							<tr class="formTableRow">
-								<th></th>
-								<th>Passing year</th>
+								<th>Exam /Degree</th>
+
 								<th>Board / university</th>
-								<th>GPA</th>
+								<th>Subject</th>
+								<th>Result</th>
+								<th>Score out of</th>
+
+								<th>Passing year</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="formTableRow">
-								<th>
-									Bachelor's / Equivalent
-								</th>
+							<tr ng-repeat="educationHistory in educationHistories" class="formTableRow">
 								<td>
-									@{{applicant.hons_passing_yr}}
+									@{{educationHistory.examName}}
 								</td>
 								<td>
-									@{{applicant.hons_university}}
+									@{{educationHistory.board_university}}
 								</td>
 								<td>
-									@{{applicant.hons_GPA}}
+									@{{educationHistory.subject}}
 								</td>
-
+								<td>
+									@{{educationHistory.scored_out_of}}
+								</td>
+								<td>
+									@{{educationHistory.result}}
+								</td>
+								<td>
+									@{{educationHistory.passingYear}}
+								</td>
 							</tr>
 
-							<tr class="formTableRow">
-								<th>HSC / Equivalent</th>
-								<td>
-									@{{applicant.hsc_passing_yr}}
-								</td>
-								<td>
-									@{{applicant.hsc_board_name}}
-								</td>
-								<td>
-									@{{applicant.hsc_GPA}}
-								</td>
 
-							</tr>
-							<tr class="formTableRow">
-								<th>SSC / Equivalent</th>
-								<td>
-									@{{applicant.ssc_passing_yr}}
-								</td>
-								<td>
-									@{{applicant.ssc_board_name}}
-								</td>
-								<td>
-									@{{applicant.ssc_GPA}}
-								</td>
-
-							</tr>
 
 						</tbody>
 					</table>
-					<h3 ng-if="applicant.companyName!=null">Employment history</h3>
-					<table ng-if="applicant.companyName!=null" class=" table table-striped">
-						<tr>
-							<th>Company / institute name</th>
-							<td colspan="4">@{{applicant.companyName}}</td>
-						</tr>
-						<tr>
-							<th>Position</th>
-							<td>@{{applicant.companyPosition}} </td>
-							<th>Joining date</th>
-							<td>@{{applicant.joiningDate}} </td>
+					<h3 ng-if="employments.length>0">Employment history</h3>
+					<table ng-if="employments.length>0" class=" table table-striped">
+						<thead>
+							<tr>
+								<th>Company /Institution name</th>
+								<th>Position</th>
+								<th>Joining Date</th>
+								<th>Leaving Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="employment in employments">
+								<td> @{{employment.companyName}} </td>
+								<td> @{{employment.companyPosition}} </td>
+								<td> @{{employment.joiningDate}} </td>
+								<td> @{{employment.endingDate}} </td>
 
-						</tr>
-
+							</tr>
+						</tbody>
 
 					</table>
 					<h3>Research History</h3>
 					<table class="table table-striped">
 						<thead>
 							<tr>
+								<th>Publication type</th>
 								<th>Research Title</th>
 								<th>Publishing Date</th>
-								<th>Platform Published on</th>
 								<th>Paper Link</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="research in researchHistory">
+								<td>
+									@{{research.publicationType}}
+								</td>
 								<td>
 									@{{research.title}}
 
@@ -568,10 +570,7 @@
 									@{{research.publishingDate}}
 
 								</td>
-								<td>
-									@{{research.publishedOn}}
 
-								</td>
 								<td>
 									@{{research.paperLink}}
 
