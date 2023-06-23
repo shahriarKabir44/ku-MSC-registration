@@ -14,9 +14,8 @@ class ApplicantEmploymentController extends Controller
         $reseach = new applicant_employment();
         $reseach->fill($inputs);
         try {
-            $data = DB::select("select * from research");
             $reseach->save();
-            return response()->json(['success' => $data]);
+            return response()->json(['success' => true]);
 
         } catch (\Throwable $th) {
             return response()->json(['success' => $th]);

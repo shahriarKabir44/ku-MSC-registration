@@ -10,17 +10,18 @@ class ApplicantEducationController extends Controller
     public function create(Request $request)
     {
         $inputs = $request->all();
-        $reseach = new applicantEducation();
-        $reseach->fill($inputs);
+        $applicantEducation = new applicantEducation();
+        $applicantEducation->fill($inputs);
         try {
 
-            $reseach->save();
+            $applicantEducation->save();
             return response()->json(['success' => true]);
 
         } catch (\Throwable $th) {
             return response()->json(['success' => $th]);
 
         }
+        // return response()->json(['success' => $inputs]);
 
     }
 }

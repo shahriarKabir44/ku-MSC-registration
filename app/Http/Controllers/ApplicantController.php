@@ -20,7 +20,7 @@ class ApplicantController extends Controller
 
 
         } catch (\Throwable $th) {
-            return response()->json(['data' => $th]);
+            return response()->json(['data' => $th, 'payload' => $applicant]);
 
         }
 

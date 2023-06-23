@@ -11,7 +11,7 @@ class Research extends Model
     protected $fillable = [
         'title',
         'publishingDate',
-        'publishedOn',
+        'publicationType',
         'applicantId',
         'paperLink'
     ];

@@ -74,7 +74,7 @@ angular.module('mscformApp', [])
                         applicantId
                     })
                 }).then(res => res.json()).then(data => {
-                    console.log(data)
+                    console.log(data, 'employment')
                 }))
             }
         }
@@ -141,7 +141,7 @@ angular.module('mscformApp', [])
                         ...educationHistory, applicantId
                     })
                 }).then(res => res.json()).then(data => {
-                    console.log(data)
+                    console.log(data, 'edu')
                 }))
             }
         }
@@ -213,7 +213,7 @@ angular.module('mscformApp', [])
                         applicantId
                     })
                 }).then(res => res.json()).then(data => {
-                    console.log(data)
+                    console.log(data, 'prop')
                 }))
 
 
@@ -287,8 +287,8 @@ angular.module('mscformApp', [])
             $scope.applicant.fatherName = $scope.applicant.fatherName.toUpperCase();
             $scope.applicant.motherName = $scope.applicant.motherName.toUpperCase();
             $scope.reformatDates()
-            if ($scope.validateForm())
-                $('#myModal').modal('show')
+            //  if ($scope.validateForm())
+            $('#myModal').modal('show')
         }
         $scope.validateForm = () => {
             if ($scope.programName != "Master_s") {
@@ -314,8 +314,8 @@ angular.module('mscformApp', [])
         $scope.confirmSubmission = () => {
             let { signatue, photo } = $scope.applicant
             let applicant = structuredClone($scope.applicant)
-            applicant.photo = "abcd"
-            applicant.signatue = "wfhwei"
+            applicant.photo = "--"
+            applicant.signature = "--"
             fetch('/api/createApplicant', {
                 method: 'POST',
                 headers: {
@@ -329,6 +329,7 @@ angular.module('mscformApp', [])
                     $scope.storeProposedResearch(newApplicant.data.id, promises)
                     $scope.storeResearchHistory(newApplicant.data.id, promises)
                     $scope.postApplicantEducationHistory(newApplicant.data.id, promises)
+                    $scope.storeEmploymentInfo(newApplicant.data.id, promises)
                     await Promise.all(promises)
                     $('#confirmationModal').modal('show')
 
