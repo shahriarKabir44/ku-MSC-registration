@@ -79,6 +79,7 @@
 					<option value="ECE">ECE</option>
 					<option value="URP">URP</option>
 					<option value="Architecture">Architecture</option>
+					<option value="Mathematics">Mathematics</option>
 				</select>
 				<label for="programName">Choose the Degree Program</label>
 				<select name="" required ng-model='applicant.programName' class="form-control">
@@ -177,21 +178,22 @@
 						<td ng-if="educationHistory.index>=2">
 							<input type="text" name="" ng-model="educationHistory.subject" id="">
 						</td>
-						</th>
+
 						<td>
 							<input type="text" name="" ng-model="educationHistory.passingYear" id="">
 
 						</td>
-						<th>
+						<td>
 							<input type="text" name="" ng-model="educationHistory.result" id="">
 
-						</th>
-						<th>
+						</td>
+						<td>
 							<input type="text" name="" ng-model="educationHistory.scored_out_of" id="">
 
-						</th>
-						<th> <button ng-disabled="educationHistory.index<3" class="btn btn-disabled"
-								ng-click="deleteEducationHistory(educationHistory.index)">Delete</button> </th>
+						</td>
+						<td> <button ng-disabled="educationHistory.index<3" class="btn btn-disabled"
+								ng-click="deleteEducationHistory(educationHistory.index)">Delete</button>
+						</td>
 
 					</tr>
 
@@ -234,7 +236,7 @@
 						</td>
 						<td>
 
-							<input type="date" required name="" ng-change="setJoiningDate(employment)"
+							<input type="date" name="" ng-change="setJoiningDate(employment)"
 								ng-model="employment.endingDate" class="tableInput form-control" id="">
 							<div style="display: flex;">
 								<input style="margin: 0;" type="checkbox"
@@ -264,9 +266,9 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
+						<th>Publication Type</th>
 						<th>Research Title</th>
 						<th>Publishing Date</th>
-						<th>Platform Published on</th>
 						<th>Paper Link</th>
 						<th>
 							<div style="display: flex;
@@ -282,9 +284,16 @@
 				<tbody>
 					<tr ng-repeat="research in researchHistory" class="formTableRow">
 						<td>
-							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
-								type="text" ng-model="research.title" id="">
-						</td>
+							<select name="" required ng-model="research.publicationType" id=""
+								class="tableInput form-control">
+								<option value="">Select one</option>
+								<option value="Conference">Conference</option>
+								<option value="Journal">Journal</option>
+								<option value="Article">Article</option>
+								<option value="Book">Book</option>
+								<option value="Other">Other</option>
+							</select>
+
 						<td>
 							<input placeholder="Type here" autocomplete="off" class="tableInput form-control"
 								type="date" ng-model="research.publishingDate" id="">

@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::table('research', function (Blueprint $table) {
             $table->string("publicationType");
-            $table->string("researchType");
         });
     }
 

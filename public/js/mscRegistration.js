@@ -32,6 +32,9 @@ angular.module('mscformApp', [])
         }
 
         //employment info start
+        $scope.formatEmploymentDates = () => {
+
+        }
         $scope.employments = []
         $scope.addEmployment = () => {
             $scope.employments.push({
@@ -40,7 +43,7 @@ angular.module('mscformApp', [])
                 companyPosition: "",
                 joiningDate: "",
                 endingDate: "",
-                isCurrentlyWorking: false
+                isCurrentlyWorking: true
             })
         }
         $scope.removeEmployment = (index) => {
