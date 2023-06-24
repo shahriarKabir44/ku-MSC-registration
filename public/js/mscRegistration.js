@@ -266,7 +266,7 @@ angular.module('mscformApp', [])
         $scope.checkSignatureImageDimensions = function (imgURL) {
             let img = new Image();
             img.onload = () => {
-                if (img.width == 300 && img.height == 300) {
+                if (img.width == 300 && img.height == 80) {
                     return 1
                 }
                 alert("The image dimension is incorrect!");
@@ -287,10 +287,10 @@ angular.module('mscformApp', [])
             $scope.applicant.fatherName = $scope.applicant.fatherName.toUpperCase();
             $scope.applicant.motherName = $scope.applicant.motherName.toUpperCase();
             $scope.reformatDates()
-            //  if ($scope.validateForm())
-            $('#myModal').modal('show')
+            if ($scope.checkFormValidity())
+                $('#myModal').modal('show')
         }
-        $scope.validateForm = () => {
+        $scope.checkFormValidity = () => {
             if ($scope.programName != "Master_s") {
                 if ($scope.researchHistory.length == 0) {
                     alert("You must add at least one research paper");
